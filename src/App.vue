@@ -16,7 +16,7 @@
             <i class="tasks icon"></i> SDP
           </router-link>
           <router-link to="/users" exact class="item">
-            <i class="tasks icon"></i> User
+            <i class="tasks icon"></i> Users
           </router-link>
         </div>
       </div>
