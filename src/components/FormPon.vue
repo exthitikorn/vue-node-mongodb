@@ -36,11 +36,12 @@
     <!-- V-SELECT -->
     <!-- <v-select :options="olts" label="olt_Name" v-model="pon.olt" ></v-select> -->
 
-    <!-- Vue -->
-    <select class="ui search dropdown" v-model="pon.olt">
-      <option value="">OLT Name</option>
+    <!-- Vue dropdown olt -->
+    <select class="ui search dropdown"  v-model="pon.olt">
+      <option value="" disabled selected hidden>Please Choose OLT Name</option>
       <option v-for="(olt, i) in olts" :key="i" v-bind:value="olt._id">{{ olt.olt_Name }}</option>
     </select>
+
 
     <button class="positive ui button">Submit</button>
   </form>

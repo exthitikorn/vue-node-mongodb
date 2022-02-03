@@ -36,8 +36,9 @@
       />
     </div>
 
+    <!-- vue dropdown pon -->
     <select class="ui search dropdown" v-model="ofccc.pon">
-      <option value="">PON Name</option>
+      <option value="" disabled selected hidden>Please PON Name</option>
       <option v-for="(pon, i) in pons" :key="i" v-bind:value="pon._id">{{ pon.pon_Name }}</option>
     </select>
 
