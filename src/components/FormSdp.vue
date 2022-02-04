@@ -27,13 +27,24 @@
         v-model="sdp.sdp_Lng"
       />
     </div>
+    <!-- Model-List-Select -->
+    <model-list-select
+      :list="ofcccs"
+      v-model="sdp.ofccc"
+      option-value="_id"
+      option-text="ofccc_Name"
+      placeholder="Select ofccc name"
+    >
+    </model-list-select>
 
+<!-- *********************************  Test dropdown  ********************************* -->
     <!-- Vue dropdown ofccc -->
-    <select class="ui search dropdown" v-model="sdp.ofccc">
+    <!-- <select class="ui search dropdown" v-model="sdp.ofccc">
       <option value="" disabled selected hidden>Please Choose ofccc Name</option>
       <option v-for="(ofccc, i) in ofcccs" :key="i" v-bind:value="ofccc._id">{{ ofccc.ofccc_Name }}</option>
-    </select>
-
+    </select> -->
+<!-- *********************************  End Test dropdown  ********************************* -->
+    
     <button class="positive ui button">Submit</button>
   </form>
 </template>
@@ -42,7 +53,10 @@
 import Vue from "vue";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
+import { ModelListSelect } from "vue-search-select";
+
 Vue.component("v-select", vSelect);
+
 import { api } from "../helpers/Helpers";
 
 export default {
@@ -85,6 +99,9 @@ export default {
         this.$emit("createOrUpdate", this.sdp);
       }
     },
+  },
+  components: {
+    ModelListSelect,
   },
 };
 </script>

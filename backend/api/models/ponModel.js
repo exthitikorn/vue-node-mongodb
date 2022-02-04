@@ -6,7 +6,8 @@ const ponSchema = new Schema(
     {
         pon_Name: {
             type: String,
-            required: "Name cannot be blank"
+            required: "Name cannot be blank",
+            unique:true
         },
         pon_Rack: {
             type: Number,

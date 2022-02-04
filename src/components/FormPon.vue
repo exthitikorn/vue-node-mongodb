@@ -25,6 +25,18 @@
       <div class="ui label"><i class=""></i>Port</div>
       <input type="text" placeholder="Enter Port..." v-model="pon.pon_Port" />
     </div>
+    <!-- Model-List-Select -->
+    <model-list-select
+      :list="olts"
+      v-model="pon.olt"
+      option-value="_id"
+      option-text="olt_Name"
+      placeholder="Select OLT name"
+    >
+    </model-list-select>
+
+    
+    <!-- *********************************  Test dropdown  ********************************* -->
     <!-- Semantic 01 -->
     <!-- <div class="ui fluid search selection dropdown">
       <i class="dropdown icon"></i>
@@ -33,15 +45,14 @@
       </div>
     </div> -->
 
-    <!-- V-SELECT -->
-    <!-- <v-select :options="olts" label="olt_Name" v-model="pon.olt" ></v-select> -->
-
     <!-- Vue dropdown olt -->
-    <select class="ui search dropdown"  v-model="pon.olt">
+    <!-- <select class="ui search dropdown" v-model="pon.olt">
       <option value="" disabled selected hidden>Please Choose OLT Name</option>
-      <option v-for="(olt, i) in olts" :key="i" v-bind:value="olt._id">{{ olt.olt_Name }}</option>
-    </select>
-
+      <option v-for="(olt, i) in olts" :key="i" v-bind:value="olt._id">
+        {{ olt.olt_Name }}
+      </option>
+    </select> -->
+    <!-- *********************************  End Test dropdown  ********************************* -->
 
     <button class="positive ui button">Submit</button>
   </form>
@@ -51,7 +62,10 @@
 import Vue from "vue";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
+import { ModelListSelect } from "vue-search-select";
+
 Vue.component("v-select", vSelect);
+
 import { api } from "../helpers/Helpers";
 
 export default {
@@ -75,7 +89,7 @@ export default {
   data() {
     return {
       errorsPresent: false,
-      olts: []
+      olts: [],
     };
   },
   async mounted() {
@@ -96,6 +110,9 @@ export default {
         this.$emit("createOrUpdate", this.pon);
       }
     },
+  },
+  components: {
+    ModelListSelect,
   },
 };
 </script>

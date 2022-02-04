@@ -35,12 +35,23 @@
         v-model="ofccc.ofccc_Lng"
       />
     </div>
+    <!-- Model-List-Select -->
+    <model-list-select
+      :list="pons"
+      v-model="ofccc.pon"
+      option-value="_id"
+      option-text="pon_Name"
+      placeholder="Select PON name"
+    >
+    </model-list-select>
 
+<!-- *********************************  Test dropdown  ********************************* -->
     <!-- vue dropdown pon -->
-    <select class="ui search dropdown" v-model="ofccc.pon">
+    <!-- <select class="ui search dropdown" v-model="ofccc.pon">
       <option value="" disabled selected hidden>Please PON Name</option>
       <option v-for="(pon, i) in pons" :key="i" v-bind:value="pon._id">{{ pon.pon_Name }}</option>
-    </select>
+    </select> -->
+<!-- ********************************* End Test dropdown  ********************************* -->
 
     <button class="positive ui button">Submit</button>
   </form>
@@ -50,7 +61,10 @@
 import Vue from "vue";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
+import { ModelListSelect } from "vue-search-select";
+
 Vue.component("v-select", vSelect);
+
 import { api } from "../helpers/Helpers";
 
 export default {
@@ -73,7 +87,7 @@ export default {
   data() {
     return {
       errorsPresent: false,
-      pons:[]
+      pons:[],
     };
   },
   async mounted() {
@@ -93,6 +107,9 @@ export default {
         this.$emit("createOrUpdate", this.ofccc);
       }
     },
+  },
+  components: {
+    ModelListSelect,
   },
 };
 </script>

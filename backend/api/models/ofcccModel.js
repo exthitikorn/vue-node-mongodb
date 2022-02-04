@@ -6,7 +6,8 @@ const ofcccSchema = new Schema(
     {
         ofccc_Name: {
             type: String,
-            required: 'Name cannot be blank'
+            required: 'Name cannot be blank',
+            unique:true
         },
         ofccc_Type: {
             type: String,

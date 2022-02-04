@@ -6,7 +6,8 @@ const sdpSchema = new Schema(
     {
         sdp_Name: {
             type: String,
-            required: 'Name cannot be blank'
+            required: 'Name cannot be blank',
+            unique:true
         },
         sdp_Type: {
             type: String,
