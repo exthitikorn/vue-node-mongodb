@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Show PON</h1>
+    <h1>PON : {{ pons.length }}</h1>
     <flash-message></flash-message>
     <div v-if="pons.length > 0">
       <table id="pons" class="ui celled table">

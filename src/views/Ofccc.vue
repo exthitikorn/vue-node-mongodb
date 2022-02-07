@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>ofccc</h1>
+    <h1>ofccc : {{ ofcccs.length }}</h1>
     <a href="/ofcccs/new" class="positive ui button">New</a>
     <flash-message></flash-message>
     <br />
@@ -56,7 +56,7 @@ export default {
       const sure = window.confirm("Are you sure?");
       if (!sure) return;
       await api.deleteofccc(id);
-      this.flash("ofccc deleted sucessfully!", "success");
+      this.flash("ofccc deleted sucessfully!", "warning");
       const newofcccs = this.ofcccs.filter((ofccc) => ofccc._id !== id);
       this.ofcccs = newofcccs;
     },

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>OLT</h1>
+    <h1>OLT : {{ olts.length }}</h1>
     <a href="/olts/new" class="positive ui button">New</a>
     <flash-message></flash-message>
     <br>

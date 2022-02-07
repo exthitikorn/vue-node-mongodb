@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>User</h1>
+        <h1>Users : {{ users.length }}</h1>
         <a href="/users/new" class="positive ui button">New</a>
         <flash-message></flash-message>
     <br />

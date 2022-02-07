@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Show ofccc</h1>
+    <h1>ofccc : {{ ofcccs.length }}</h1>
     <flash-message></flash-message>
     <div v-if="ofcccs.length > 0">
       <table id="ofcccs" class="ui celled table">

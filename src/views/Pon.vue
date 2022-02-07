@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>PON</h1>
+    <h1>PON : {{ pons.length }}</h1>
     <a href="/pons/new" class="positive ui button">New</a>
     <flash-message></flash-message>
     <br>
@@ -58,7 +58,7 @@ export default {
       const sure = window.confirm("Are you sure?");
       if (!sure) return;
       await api.deletepon(id);
-      this.flash("PON deleted sucessfully!", "success");
+      this.flash("PON deleted sucessfully!", "warning");
       const newpons = this.pons.filter((pon) => pon._id !== id);
       this.pons = newpons;
     },

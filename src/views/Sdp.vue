@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>SDP</h1>
+    <h1>SDP : {{ sdps.length }}</h1>
     <a href="/sdps/new" class="positive ui button">New</a>
     <flash-message></flash-message>
     <br />
@@ -56,7 +56,7 @@ export default {
       const sure = window.confirm("Are you sure?");
       if (!sure) return;
       await api.deletesdp(id);
-      this.flash("SDP deleted sucessfully!", "success");
+      this.flash("SDP deleted sucessfully!", "warning");
       const newsdps = this.sdps.filter((sdp) => sdp._id !== id);
       this.sdps = newsdps;
     },

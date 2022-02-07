@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Show SDP</h1>
+    <h1>SDP : {{ sdps.length }}</h1>
     <flash-message></flash-message>
     <div v-if="sdps.length > 0">
       <table id="sdps" class="ui celled table">
