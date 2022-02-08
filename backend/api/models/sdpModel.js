@@ -28,11 +28,5 @@ const sdpSchema = new Schema(
     },
     { collection: 'sdp' }
 )
-sdpSchema.index({
-    ofccc: 2,
-    sdp_Name:1
-  }, {
-    unique: true
-  });
 
 module.exports = mongoose.model('sdp', sdpSchema)
