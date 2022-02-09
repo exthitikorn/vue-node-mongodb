@@ -35,25 +35,6 @@
     >
     </model-list-select>
 
-    
-    <!-- *********************************  Test dropdown  ********************************* -->
-    <!-- Semantic 01 -->
-    <!-- <div class="ui fluid search selection dropdown">
-      <i class="dropdown icon"></i>
-      <div class="menu" v-for="(olt, i) in olts" :key="i">
-        <div class="item" :data-value="olt._id">{{olt.olt_Name}}</div>
-      </div>
-    </div> -->
-
-    <!-- Vue dropdown olt -->
-    <!-- <select class="ui search dropdown" v-model="pon.olt">
-      <option value="" disabled selected hidden>Please Choose OLT Name</option>
-      <option v-for="(olt, i) in olts" :key="i" v-bind:value="olt._id">
-        {{ olt.olt_Name }}
-      </option>
-    </select> -->
-    <!-- *********************************  End Test dropdown  ********************************* -->
-
     <button class="positive ui button">Submit</button>
   </form>
 </template>

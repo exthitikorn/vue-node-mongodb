@@ -36,14 +36,6 @@
       placeholder="Select ofccc name"
     >
     </model-list-select>
-
-<!-- *********************************  Test dropdown  ********************************* -->
-    <!-- Vue dropdown ofccc -->
-    <!-- <select class="ui search dropdown" v-model="sdp.ofccc">
-      <option value="" disabled selected hidden>Please Choose ofccc Name</option>
-      <option v-for="(ofccc, i) in ofcccs" :key="i" v-bind:value="ofccc._id">{{ ofccc.ofccc_Name }}</option>
-    </select> -->
-<!-- *********************************  End Test dropdown  ********************************* -->
     
     <button class="positive ui button">Submit</button>
   </form>

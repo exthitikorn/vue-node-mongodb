@@ -45,14 +45,6 @@
     >
     </model-list-select>
 
-<!-- *********************************  Test dropdown  ********************************* -->
-    <!-- vue dropdown pon -->
-    <!-- <select class="ui search dropdown" v-model="ofccc.pon">
-      <option value="" disabled selected hidden>Please PON Name</option>
-      <option v-for="(pon, i) in pons" :key="i" v-bind:value="pon._id">{{ pon.pon_Name }}</option>
-    </select> -->
-<!-- ********************************* End Test dropdown  ********************************* -->
-
     <button class="positive ui button">Submit</button>
   </form>
 </template>

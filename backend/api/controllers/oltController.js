@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const olt = mongoose.model('olt');
 const pon = mongoose.model('pon');
 
+//List all OLT
 exports.list_all_olt = (req, res)=>{
     olt.find({},(err,olts)=>{
         if(err) res.send(err);
@@ -9,6 +10,7 @@ exports.list_all_olt = (req, res)=>{
     })
 }
 
+//Create OLT
 exports.create_a_olt = (req, res)=>{
     const newOlt = new olt(req.body);
     newOlt.save((err, olt)=>{
@@ -17,6 +19,7 @@ exports.create_a_olt = (req, res)=>{
     })
 }
 
+//
 exports.read_a_olt = (req, res)=>{
     olt.findById(req.params.oltId,(err, olt)=>{
         if(err) res.send(err);
@@ -24,6 +27,7 @@ exports.read_a_olt = (req, res)=>{
     })
 }
 
+//List PON
 exports.read_a_pon = (req, res)=>{
     pon.find({olt: req.params.oltId},(err, olts)=>{
         if(err) res.send(err);
@@ -31,6 +35,7 @@ exports.read_a_pon = (req, res)=>{
     })
 }
 
+//Update OLT
 exports.update_a_olt = (req, res)=> {
     olt.findByIdAndUpdate(
         {_id: req.params.oltId},
@@ -43,6 +48,7 @@ exports.update_a_olt = (req, res)=> {
     )
 }
 
+//Delete OLT
 exports.delete_a_olt = (req, res)=>{
     olt.deleteOne({olt_Name: req.params.oltId}, err =>{
         if(err) res.send(err);
