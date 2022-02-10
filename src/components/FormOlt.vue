@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { api } from "../helpers/Helpers";
 export default {
   name: "olt-form",
   props: {
@@ -27,20 +26,16 @@ export default {
   data() {
     return {
       errorsPresent: false,
-      olts: [],
     };
   },
   methods: {
     onSubmit: function() {
-      if (this.olt.olt_Name === "" || this.olt.olt_Name === this.olts.olt_Name) {
+      if (this.olt.olt_Name === "") {
         this.errorsPresent = true;
       } else {
         this.$emit("createOrUpdate", this.olt);
       }
     },
-  },
-  async mounted() {
-    this.olts = await api.getolts();
   },
 };
 </script>
