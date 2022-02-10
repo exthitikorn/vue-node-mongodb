@@ -50,7 +50,7 @@ export default {
       const sure = window.confirm("Are you sure?");
       if (!sure) return;
       await api.deleteuser(id);
-      this.flash("User deleted sucessfully!", "success");
+      this.flash("User deleted sucessfully!", "error");
       const newusers = this.users.filter((user) => user._id !== id);
       this.users = newusers;
     },

@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Edit SDP</h1>
+    <flash-message></flash-message>
     <sdp-form @createOrUpdate="createOrUpdate" :sdp="this.sdp"></sdp-form>
   </div>
 </template>
@@ -20,9 +21,15 @@ export default {
   },
   methods: {
     createOrUpdate: async function (sdp) {
-      await api.updatesdp(sdp);
-      this.flash("SDP updated sucessfully!", "success");
-      this.$router.push(`/sdps/`);
+      const res = await api.updatesdp(sdp);
+      if(res.code === 11000){
+        this.flash('Duplicate SDP name cannot update', 'warning')
+        // this.$router.push('/sdps/')
+      }else{
+        this.flash("SDP updated sucessfully!", "success");
+        this.$router.push(`/sdps/`);
+      }
+      
     },
   },
   async mounted() {

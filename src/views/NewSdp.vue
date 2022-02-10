@@ -16,9 +16,15 @@ export default {
   },
   methods: {
     createOrUpdate: async function (sdp) {
-      await api.createsdp(sdp);
-      this.flash("SDP created", "success");
-      this.$router.push(`/sdps/`);
+      const res = await api.createsdp(sdp);
+      if(res.code === 11000){
+        this.flash('Duplicate SDP name cannot create', 'warning')
+        this.$router.push('/sdps/')
+      }else{
+        this.flash("SDP created", "success");
+        this.$router.push(`/sdps/`);
+      }
+      
     },
   },
 };

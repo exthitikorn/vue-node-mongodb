@@ -1,6 +1,7 @@
 <template>
     <div>
         <h1>Edit User</h1>
+        <flash-message></flash-message>
         <user-form @createOrUpdate="createOrUpdate" :user=this.user></user-form>
     </div>
 </template>
@@ -20,9 +21,15 @@ export default {
   },
   methods: {
     createOrUpdate: async function(user) {
-      await api.updateuser(user);
-      this.flash('User updated sucessfully!', 'success');
-      this.$router.push(`/users/`);
+      const res = await api.updateuser(user);
+      if(res.code === 11000){
+        this.flash('Duplicate username cannot update', 'warning')
+        // this.$route.push('/users/')
+      }else{
+        this.flash('User updated sucessfully!', 'success');
+        this.$router.push(`/users/`);
+      }
+      
     }
   },
   async mounted() {

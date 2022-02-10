@@ -25,7 +25,7 @@ exports.read_a_user = (req, res)=>{
 
 exports.update_a_user = (req, res)=> {
     user.findByIdAndUpdate(
-        {username: req.params.userId},
+        {_id: req.params.userId},
         req.body,
         {new: true},
         (err, user)=>{

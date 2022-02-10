@@ -48,7 +48,7 @@ export default {
       const sure = window.confirm("Are you sure?");
       if (!sure) return;
       await api.deleteolt(id);
-      this.flash("olt deleted sucessfully!", "success");
+      this.flash("OLT deleted sucessfully!", "error");
       const newolts = this.olts.filter((olt) => olt.olt_Name !== id);
       this.olts = newolts;
     },

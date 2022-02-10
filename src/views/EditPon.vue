@@ -21,9 +21,15 @@ export default {
   },
   methods: {
     createOrUpdate: async function (pon) {
-      await api.updatepon(pon);
-      this.flash("PON updated sucessfully!", "success");
-      this.$router.push(`/pons/`);
+      const res = await api.updatepon(pon);
+      if(res.code === 11000){
+        this.flash("Duplicate PON Name, Rack, Shelf, Slot, Port, OLT name cannot update", "warning")
+        // this.$router.push("/pons/")
+      }else{
+        this.flash("PON updated sucessfully!", "success");
+        this.$router.push(`/pons/`);
+      }
+      
     },
   },
   async mounted() {

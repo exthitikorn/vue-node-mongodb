@@ -16,9 +16,15 @@ export default {
   },
   methods: {
     createOrUpdate: async function (user) {
-      await api.createuser(user);
-      this.flash("User created", "success");
-      this.$router.push(`/users/`);
+      const res = await api.createuser(user);
+      if(res.code === 11000){
+        this.flash('Duplicate username cannot create', 'warning')
+        this.$router.push(`/users/`);
+      }else{
+        this.flash("User created", "success");
+        this.$router.push(`/users/`);
+      }
+      
     },
   },
 };

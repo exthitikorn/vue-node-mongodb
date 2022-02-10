@@ -21,9 +21,14 @@ export default {
   },
   methods: {
     createOrUpdate: async function (olt) {
-      await api.updateolt(olt);
-      this.flash("OLT updated sucessfully!", "success");
+      const res = await api.updateolt(olt);
+      if(res.code === 11000) {
+        this.flash('Duplicate OLT name cannot update', "warning");
+        // this.$router.push(`/olts/`);
+      }else{
+        this.flash("OLT updated sucessfully!", "success");
       this.$router.push(`/olts/`);
+      }
     },
   },
   async mounted() {
