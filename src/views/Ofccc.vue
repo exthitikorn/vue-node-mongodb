@@ -56,7 +56,7 @@ export default {
       const sure = window.confirm("Are you sure?");
       if (!sure) return;
       await api.deleteofccc(id);
-      this.flash("ofccc deleted sucessfully!", "warning");
+      this.flash("ofccc deleted sucessfully!", "error");
       const newofcccs = this.ofcccs.filter((ofccc) => ofccc._id !== id);
       this.ofcccs = newofcccs;
     },

@@ -58,7 +58,7 @@ export default {
       const sure = window.confirm("Are you sure?");
       if (!sure) return;
       await api.deletepon(id);
-      this.flash("PON deleted sucessfully!", "warning");
+      this.flash("PON deleted sucessfully!", "error");
       const newpons = this.pons.filter((pon) => pon._id !== id);
       this.pons = newpons;
     },

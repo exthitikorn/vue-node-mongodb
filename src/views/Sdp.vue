@@ -56,7 +56,7 @@ export default {
       const sure = window.confirm("Are you sure?");
       if (!sure) return;
       await api.deletesdp(id);
-      this.flash("SDP deleted sucessfully!", "warning");
+      this.flash("SDP deleted sucessfully!", "error");
       const newsdps = this.sdps.filter((sdp) => sdp._id !== id);
       this.sdps = newsdps;
     },
