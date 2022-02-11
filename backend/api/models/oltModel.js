@@ -8,6 +8,14 @@ const oltSchema = new Schema(
             type: String,
             required: 'Name cannot be blank',
             unique:true
+        },
+        olt_Lat:{
+            type: Number,
+            required: 'Latitude cannot be blank'
+        },
+        olt_Lng:{
+            type: Number,
+            required: 'Longitude cannot be blank'
         }
     },
     { collection: 'olt' }

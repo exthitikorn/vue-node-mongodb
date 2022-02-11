@@ -8,7 +8,9 @@
       <table id="olts" class="ui celled table">
         <thead>
           <tr>
-            <th><i class=""></i>OLT Name</th>
+            <th>OLT Name</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
             <th><i class="info circle icon"></i></th>
             <th><i class="edit icon"></i></th>
             <th><i class="trash icon"></i></th>
@@ -16,6 +18,8 @@
         </thead>
         <tr v-for="(olt, i) in olts" :key="i">
           <td>{{ olt.olt_Name }}</td>
+          <td>{{ olt.olt_Lat }}</td>
+          <td>{{ olt.olt_Lng }}</td>
           <td width="120" class="center aligned">
             <router-link :to="{ name: 'show-pon-olt', params: { id: olt._id } }"
               >Show PON</router-link>
