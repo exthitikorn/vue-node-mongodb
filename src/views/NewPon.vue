@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import pon from '../components/FormPon.vue';
+import pon from "../components/FormPon.vue";
 import { api } from "../helpers/Helpers";
 
 export default {
@@ -17,14 +17,16 @@ export default {
   methods: {
     createOrUpdate: async function (pon) {
       const res = await api.createpon(pon);
-      if(res.code === 11000){
-        this.flash("Duplicate PON Name, Rack, Shelf, Slot, Port, OLT name cannot create", "warning")
-        this.$router.push('/pons/')
-      }else{
+      if (res.code === 11000) {
+        this.flash(
+          "Duplicate PON Name, Rack, Shelf, Slot, Port, OLT name cannot create",
+          "warning"
+        );
+        this.$router.push("/pons/");
+      } else {
         this.flash("PON created", "success");
         this.$router.push(`/pons/`);
       }
-      
     },
   },
 };

@@ -22,12 +22,12 @@ export default {
   methods: {
     createOrUpdate: async function (olt) {
       const res = await api.updateolt(olt);
-      if(res.code === 11000) {
-        this.flash('Duplicate OLT name cannot update', "warning");
+      if (res.code === 11000) {
+        this.flash("Duplicate OLT name cannot update", "warning");
         // this.$router.push(`/olts/`);
-      }else{
+      } else {
         this.flash("OLT updated sucessfully!", "success");
-      this.$router.push(`/olts/`);
+        this.$router.push(`/olts/`);
       }
     },
   },

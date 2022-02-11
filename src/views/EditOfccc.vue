@@ -2,7 +2,10 @@
   <div>
     <h1>Edit ofccc</h1>
     <flash-message></flash-message>
-    <ofccc-form @createOrUpdate="createOrUpdate" :ofccc="this.ofccc"></ofccc-form>
+    <ofccc-form
+      @createOrUpdate="createOrUpdate"
+      :ofccc="this.ofccc"
+    ></ofccc-form>
   </div>
 </template>
 
@@ -22,14 +25,13 @@ export default {
   methods: {
     createOrUpdate: async function (ofccc) {
       const res = await api.updateofccc(ofccc);
-      if(res.code === 11000){
-        this.flash('Duplicate ofccc name, PON name cannot update', 'warning')
+      if (res.code === 11000) {
+        this.flash("Duplicate ofccc name, PON name cannot update", "warning");
         // this.$router.push('/ofcccs/')
-      }else{
+      } else {
         this.flash("ofccc updated sucessfully!", "success");
         this.$router.push(`/ofcccs/`);
       }
-      
     },
   },
   async mounted() {

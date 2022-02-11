@@ -1,39 +1,38 @@
 <template>
-    <div>
-        <h1>Edit User</h1>
-        <flash-message></flash-message>
-        <user-form @createOrUpdate="createOrUpdate" :user=this.user></user-form>
-    </div>
+  <div>
+    <h1>Edit User</h1>
+    <flash-message></flash-message>
+    <user-form @createOrUpdate="createOrUpdate" :user="this.user"></user-form>
+  </div>
 </template>
 
 <script>
-import user from '../components/FormUser.vue'
-import { api } from '../helpers/Helpers';
+import user from "../components/FormUser.vue";
+import { api } from "../helpers/Helpers";
 export default {
-  name: 'edit-user',
+  name: "edit-user",
   components: {
-    'user-form': user,
+    "user-form": user,
   },
-  data: function() {
+  data: function () {
     return {
-      user: {}
+      user: {},
     };
   },
   methods: {
-    createOrUpdate: async function(user) {
+    createOrUpdate: async function (user) {
       const res = await api.updateuser(user);
-      if(res.code === 11000){
-        this.flash('Duplicate username cannot update', 'warning')
+      if (res.code === 11000) {
+        this.flash("Duplicate username cannot update", "warning");
         // this.$route.push('/users/')
-      }else{
-        this.flash('User updated sucessfully!', 'success');
+      } else {
+        this.flash("User updated sucessfully!", "success");
         this.$router.push(`/users/`);
       }
-      
-    }
+    },
   },
   async mounted() {
     this.user = await api.getuser(this.$route.params.id);
-  }
+  },
 };
 </script>

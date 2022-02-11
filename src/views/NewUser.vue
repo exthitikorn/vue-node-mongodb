@@ -1,12 +1,12 @@
 <template>
-    <div>
-        <h1>New User</h1>
-        <user-form @createOrUpdate="createOrUpdate"></user-form>
-    </div>
+  <div>
+    <h1>New User</h1>
+    <user-form @createOrUpdate="createOrUpdate"></user-form>
+  </div>
 </template>
 
 <script>
-import user from "../components/FormUser.vue"
+import user from "../components/FormUser.vue";
 import { api } from "../helpers/Helpers";
 
 export default {
@@ -17,14 +17,13 @@ export default {
   methods: {
     createOrUpdate: async function (user) {
       const res = await api.createuser(user);
-      if(res.code === 11000){
-        this.flash('Duplicate username cannot create', 'warning')
+      if (res.code === 11000) {
+        this.flash("Duplicate username cannot create", "warning");
         this.$router.push(`/users/`);
-      }else{
+      } else {
         this.flash("User created", "success");
         this.$router.push(`/users/`);
       }
-      
     },
   },
 };

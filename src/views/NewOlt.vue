@@ -22,7 +22,7 @@ export default {
         this.$router.push(`/olts/`);
       }else{
         this.flash("OLT created", "success");
-      this.$router.push(`/olts/`);
+        this.$router.push(`/olts/`);
       }
     },
   },
