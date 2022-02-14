@@ -25,7 +25,10 @@
           <td>{{ ofccc.ofccc_Lat }}</td>
           <td>{{ ofccc.ofccc_Lng }}</td>
           <td>{{ ofccc.pon.pon_Name }}</td>
-          <td width="75">Location</td>
+          <td width="75">
+            <router-link :to="{ name: 'google-map-ofccc', params: { id: ofccc._id } }"
+              >Location</router-link>
+          </td>
           <td width="120" class="center aligned">
             <router-link :to="{ name: 'show-ofccc-sdp', params: { id: ofccc._id } }"
               >Show SDP</router-link>

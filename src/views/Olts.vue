@@ -21,7 +21,10 @@
           <td>{{ olt.olt_Name }}</td>
           <td>{{ olt.olt_Lat }}</td>
           <td>{{ olt.olt_Lng }}</td>
-          <td width="75" class="center aligned">Location</td>
+          <td width="75" class="center aligned">
+            <router-link :to="{ name: 'google-map-olt', params: { id: olt._id } }"
+              >Location</router-link>
+          </td>
           <td width="120" class="center aligned">
             <router-link :to="{ name: 'show-pon-olt', params: { id: olt._id } }"
               >Show PON</router-link>

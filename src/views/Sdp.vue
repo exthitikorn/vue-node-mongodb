@@ -24,7 +24,10 @@
           <td>{{ sdp.sdp_Lat }}</td>
           <td>{{ sdp.sdp_Lng }}</td>
           <td>{{ sdp.ofccc.ofccc_Name }}</td>
-          <td width="75" class="center aligned">Location</td>
+          <td width="75" class="center aligned">
+            <router-link :to="{ name: 'google-map-sdp', params: { id: sdp._id } }"
+              >Location</router-link>
+          </td>
           <td width="75" class="center aligned">
             <router-link :to="{ name: 'edit-sdp', params: { id: sdp._id } }"
               >Edit</router-link>

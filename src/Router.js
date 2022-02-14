@@ -26,6 +26,11 @@ import NewUser from './views/NewUser.vue';
 import ShowUser from './views/ShowUser.vue';
 import EditUser from './views/EditUser.vue';
 
+//Google map
+import googlemapOlt from './views/GoogleMapOlt.vue';
+import googlemapOfccc from './views/GoogleMapOfccc.vue';
+import googlemapSdp from './views/GoogleMapSdp.vue';
+
 Vue.use(Router);
 
 export default new Router({
@@ -141,7 +146,22 @@ export default new Router({
       path: '/users/:id/edit',
       name: 'edit-user',
       component: EditUser
-    }
-   
+    },
+    //google map
+   {
+     path: '/googlemapolt/:id',
+     name: 'google-map-olt',
+     component: googlemapOlt
+   },
+   {
+    path: '/googlemapofccc/:id',
+    name: 'google-map-ofccc',
+    component: googlemapOfccc
+  },
+  {
+    path: '/googlemapsdp/:id',
+    name: 'google-map-sdp',
+    component: googlemapSdp
+  }
   ]
 });
