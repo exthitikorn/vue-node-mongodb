@@ -1,51 +1,49 @@
 <template>
-  <form action="#" @submit.prevent="onSubmit">
-    <p v-if="errorsPresent" class="error">Please fill out both fields!</p>
-    <div class="ui labeled input fluid">
-      <div class="ui label"><i class=""></i>Name</div>
-      <input type="text" placeholder="Enter Name..." v-model="olt.olt_Name" />
-    </div>
-    <div>
-      <GmapMap
-        :center="center"
-        :zoom="5"
-        map-style-id="roadmap"
-        :options="mapOptions"
-        style="width: 100%; height: 400px"
-        ref="mapRef"
-        @click="handleMapClick"
-      >
-        <GmapMarker
-          :position="marker.position"
-          :clickable="true"
-          :draggable="true"
-          @drag="handleMarkerDrag"
-          @click="panToMarker"
-        />
-      </GmapMap>
-    </div>
-    <br />
-    <!-- {{ marker.position.lat }} {{ marker.position.lng }} -->
-    <div class="ui labeled input fluid">
-      <div class="ui label">Latitude</div>
-      <input
-        type="number"
-        step="any"
-        v-model="olt.olt_Lat"
-        :placeholder="marker.position.lat"
-      />
-    </div>
-    <div class="ui labeled input fluid">
-      <div class="ui label">Longitude</div>
-      <input
-        type="number"
-        step="any"
-        v-model="olt.olt_Lng"
-        :placeholder="marker.position.lng"
-      />
-    </div>
-    <button class="positive ui button">Submit</button>
-  </form>
+  <div class="row">
+    <form action="#" @submit.prevent="onSubmit">
+      <div class="column">
+        <p v-if="errorsPresent" class="error">Please fill out both fields!</p>
+        <div class="ui labeled input fluid">
+          <div class="ui label"><i class=""></i>Name</div>
+          <input
+            type="text"
+            placeholder="Enter Name..."
+            v-model="olt.olt_Name"
+          />
+        </div>
+        <div class="ui labeled input fluid">
+          <div class="ui label">Latitude</div>
+          <input type="number" step="any" v-model="olt.olt_Lat" />
+        </div>
+        <div class="ui labeled input fluid">
+          <div class="ui label">Longitude</div>
+          <input type="number" step="any" v-model="olt.olt_Lng" />
+        </div>
+        <button class="positive ui button">Submit</button>
+      </div>
+      <div class="column">
+        <div>
+          <GmapMap
+            :center="center"
+            :zoom="5"
+            map-style-id="roadmap"
+            :options="mapOptions"
+            style="width: 100%; height: 400px"
+            ref="mapRef"
+            @click="handleMapClick"
+          >
+            <GmapMarker
+              :position="marker.position"
+              :clickable="true"
+              :draggable="true"
+              @drag="handleMarkerDrag"
+              @click="panToMarker"
+            />
+          </GmapMap>
+        </div>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -76,7 +74,7 @@ export default {
     };
   },
   methods: {
-    onSubmit: function() {
+    onSubmit: function () {
       if (
         this.olt.olt_Name === "" ||
         this.olt.olt_Lat === "" ||
@@ -103,6 +101,8 @@ export default {
     //sets the position of marker when dragged
     handleMarkerDrag(e) {
       this.marker.position = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+      this.olt.olt_Lat = this.marker.position.lat;
+      this.olt.olt_Lng = this.marker.position.lng;
     },
 
     //Moves the map view port to marker
@@ -114,6 +114,8 @@ export default {
     //Moves the marker to click position on the map
     handleMapClick(e) {
       this.marker.position = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+      this.olt.olt_Lat = this.marker.position.lat;
+      this.olt.olt_Lng = this.marker.position.lng;
       console.log(e);
     },
   },
@@ -126,5 +128,17 @@ export default {
 <style scoped>
 .error {
   color: red;
+}
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 </style>
