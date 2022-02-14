@@ -14,9 +14,9 @@
             <th><i class=""></i>Slot</th>
             <th><i class=""></i>Port</th>
             <th><i class=""></i>OLT Name</th>
-            <th><i class="info circle icon"></i></th>
-            <th><i class="edit icon"></i></th>
-            <th><i class="trash icon"></i></th>
+            <th class="center aligned"><i class="info circle icon"></i></th>
+            <th class="center aligned"><i class="edit icon"></i></th>
+            <th class="center aligned"><i class="trash icon"></i></th>
           </tr>
         </thead>
         <tr v-for="(pon, i) in pons" :key="i">

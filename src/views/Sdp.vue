@@ -13,9 +13,9 @@
             <th><i class=""></i>Lattitude</th>
             <th><i class=""></i>Longitude</th>
             <th><i class=""></i>ofccc Name</th>
-            <!-- <th><i class="info circle icon"></i></th> -->
-            <th><i class="edit icon"></i></th>
-            <th><i class="trash icon"></i></th>
+            <th class="center aligned"><i class="map marker alternate icon"></i></th>
+            <th class="center aligned"><i class="edit icon"></i></th>
+            <th class="center aligned"><i class="trash icon"></i></th>
           </tr>
         </thead>
         <tr v-for="(sdp, i) in sdps" :key="i">
@@ -24,10 +24,7 @@
           <td>{{ sdp.sdp_Lat }}</td>
           <td>{{ sdp.sdp_Lng }}</td>
           <td>{{ sdp.ofccc.ofccc_Name }}</td>
-          <!-- <td width="75" class="center aligned">
-            <router-link :to="{ name: 'show-sdp', params: { id: sdp._id } }"
-              >Show</router-link>
-          </td> -->
+          <td width="75" class="center aligned">Location</td>
           <td width="75" class="center aligned">
             <router-link :to="{ name: 'edit-sdp', params: { id: sdp._id } }"
               >Edit</router-link>
