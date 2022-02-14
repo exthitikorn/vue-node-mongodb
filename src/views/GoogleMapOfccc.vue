@@ -6,7 +6,7 @@
       :zoom="16"
       :options="mapOptions"
       map-style-id="roadmap"
-      style="width: 100%; height: 650px"
+      style="width: 100%; height: 600px"
     >
       <GmapMarker
         :position="marker.position"
@@ -14,6 +14,9 @@
         :draggable="false"
       />
     </GmapMap>
+    <div class="container6">
+      <a onclick="history.back()" class="negative ui button">Back</a>
+    </div>
   </div>
 </template>
 
@@ -48,5 +51,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+div.container6 {
+  height: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+div.container6 p {
+  margin: 0;
+}
 </style>

@@ -25,7 +25,10 @@
         v-model="user.Line_id"
       />
     </div>
-    <button class="positive ui button">Submit</button>
+    <table>
+      <td><button class="positive ui button">Submit</button></td>
+      <td><a onclick="history.back()" class="negative ui button">Back</a></td>
+    </table>
   </form>
 </template>
 

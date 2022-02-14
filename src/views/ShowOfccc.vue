@@ -19,6 +19,9 @@
           <td>{{ sdp.sdp_Lng }}</td>
         </tr>
       </table>
+      <div class="container6">
+        <a onclick="history.back()" class="negative ui button">Back</a>
+      </div>
     </div>
     <div v-else>You don't have any SDP!.</div>
   </div>
@@ -44,5 +47,14 @@ export default {
   display: block;
   text-decoration: underline;
   margin: 20px 10px;
+}
+div.container6 {
+  height: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+div.container6 p {
+  margin: 0;
 }
 </style>

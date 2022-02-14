@@ -19,7 +19,10 @@
           <div class="ui label">Longitude</div>
           <input type="number" step="any" v-model="olt.olt_Lng" placeholder="Enter Longitude..." />
         </div>
-        <button class="positive ui button">Submit</button>
+        <table>
+          <td><button class="positive ui button">Submit</button></td>
+          <td><a onclick="history.back()" class="negative ui button">Back</a></td>
+        </table>
       </div>
       <div class="column">
         <div>
