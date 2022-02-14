@@ -4,19 +4,19 @@
       <div class="ui center aligned container">
         <div class="ui large secondary inverted pointing menu compact">
           <router-link to="/olts" exact class="item">
-            <i class="tasks icon"></i> OLT
+            <i class="table icon"></i> OLT
           </router-link>
           <router-link to="/pons" exact class="item">
-            <i class="tasks icon"></i> PON
+            <i class="table icon"></i> PON
           </router-link>
           <router-link to="/ofcccs" exact class="item">
-            <i class="tasks icon"></i> ofccc
+            <i class="table icon"></i> ofccc
           </router-link>
           <router-link to="/sdps" exact class="item">
-            <i class="tasks icon"></i> SDP
+            <i class="table icon"></i> SDP
           </router-link>
           <router-link to="/users" exact class="item">
-            <i class="tasks icon"></i> Users
+            <i class="table icon"></i> Users
           </router-link>
         </div>
       </div>

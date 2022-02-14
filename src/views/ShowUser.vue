@@ -14,9 +14,19 @@
       <div class="ui label"><i class=""></i> LINE ID</div>
       <input type="text" readonly :value="user.Line_id" />
     </div>
-    <div class="actions">
-      <router-link :to="{ name: 'edit-user', params: { id: this.$route.params.id } }"> Edit User</router-link>
-    </div>
+    <table>
+      <td>
+        <router-link
+          class="ui orange button"
+          :to="{ name: 'edit-user', params: { id: this.$route.params.id } }"
+        >
+          Edit User</router-link
+        >
+      </td>
+      <td>
+        <a onclick="history.back()" class="negative ui button">Back</a>
+      </td>
+    </table>
   </div>
 </template>
 
