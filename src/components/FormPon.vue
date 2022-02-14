@@ -2,7 +2,7 @@
   <form action="#" @submit.prevent="onSubmit">
     <p v-if="errorsPresent" class="error">Please fill out both fields!</p>
     <div class="ui labeled input fluid">
-      <div class="ui label"><i class=""></i>PON Name</div>
+      <div class="ui label"><i class=""></i>PON name</div>
       <input
         type="text"
         placeholder="Enter PON Name..."
@@ -25,15 +25,18 @@
       <div class="ui label"><i class=""></i>Port</div>
       <input type="text" placeholder="Enter Port..." v-model="pon.pon_Port" />
     </div>
-    <!-- Model-List-Select -->
-    <model-list-select
-      :list="olts"
-      v-model="pon.olt"
-      option-value="_id"
-      option-text="olt_Name"
-      placeholder="Select OLT name"
-    >
-    </model-list-select>
+    <div class="ui labeled input fluid">
+      <div class="ui label"><i class=""></i>OLT name</div>
+      <!-- Model-List-Select -->
+      <model-list-select
+        :list="olts"
+        v-model="pon.olt"
+        option-value="_id"
+        option-text="olt_Name"
+        placeholder="Select OLT name"
+      >
+      </model-list-select>
+    </div>
 
     <button class="positive ui button">Submit</button>
   </form>

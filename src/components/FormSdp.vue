@@ -4,7 +4,7 @@
       <div class="column">
         <p v-if="errorsPresent" class="error">Please fill out both fields!</p>
         <div class="ui labeled input fluid">
-          <div class="ui label"><i class=""></i>SDP Name</div>
+          <div class="ui label"><i class=""></i>SDP name</div>
           <input
             type="text"
             placeholder="Enter SDP Name..."
@@ -12,12 +12,15 @@
           />
         </div>
         <div class="ui labeled input fluid">
-          <div class="ui label"><i class=""></i>SDP Type</div>
-          <input
-            type="text"
-            placeholder="Enter SDP Type..."
+          <div class="ui label"><i class=""></i>SDP type</div>
+          <model-list-select
+            :list="options"
             v-model="sdp.sdp_Type"
-          />
+            option-value="value"
+            option-text="value"
+            placeholder="Select SDP type"
+          >
+          </model-list-select>
         </div>
         <div class="ui labeled input fluid">
           <div class="ui label"><i class=""></i>Latitude</div>
@@ -37,15 +40,19 @@
             v-model="sdp.sdp_Lng"
           />
         </div>
-        <!-- Model-List-Select -->
-        <model-list-select
-          :list="ofcccs"
-          v-model="sdp.ofccc"
-          option-value="_id"
-          option-text="ofccc_Name"
-          placeholder="Select ofccc name"
-        >
-        </model-list-select>
+        <div class="ui labeled input fluid">
+          <div class="ui label"><i class=""></i>ofccc name</div>
+          <!-- Model-List-Select -->
+          <model-list-select
+            :list="ofcccs"
+            v-model="sdp.ofccc"
+            option-value="_id"
+            option-text="ofccc_Name"
+            placeholder="Select ofccc name"
+          >
+          </model-list-select>
+        </div>
+
         <button class="positive ui button">Submit</button>
       </div>
       <div class="column">
@@ -104,6 +111,12 @@ export default {
     return {
       errorsPresent: false,
       ofcccs: [],
+      options: [
+        { value: "4 Port" },
+        { value: "8 Port" },
+        { value: "16 Port" },
+        { value: "32 Port" },
+      ],
       marker: { position: { lat: 0, lng: 0 } },
       center: { lat: 14.355836188695562, lng: 100.56920170783997 },
 
