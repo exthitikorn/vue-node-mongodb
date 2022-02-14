@@ -13,11 +13,11 @@
         </div>
         <div class="ui labeled input fluid">
           <div class="ui label">Latitude</div>
-          <input type="number" step="any" v-model="olt.olt_Lat" />
+          <input type="number" step="any" v-model="olt.olt_Lat" placeholder="Enter Latitude..." />
         </div>
         <div class="ui labeled input fluid">
           <div class="ui label">Longitude</div>
-          <input type="number" step="any" v-model="olt.olt_Lng" />
+          <input type="number" step="any" v-model="olt.olt_Lng" placeholder="Enter Longitude..." />
         </div>
         <button class="positive ui button">Submit</button>
       </div>

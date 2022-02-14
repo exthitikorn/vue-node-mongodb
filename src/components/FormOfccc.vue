@@ -1,52 +1,76 @@
 <template>
-  <form action="#" @submit.prevent="onSubmit">
-    <p v-if="errorsPresent" class="error">Please fill out both fields!</p>
-    <div class="ui labeled input fluid">
-      <div class="ui label"><i class=""></i>ofccc Name</div>
-      <input
-        type="text"
-        placeholder="Enter ofccc Name..."
-        v-model="ofccc.ofccc_Name"
-      />
-    </div>
-    <div class="ui labeled input fluid">
-      <div class="ui label"><i class=""></i>Type</div>
-      <input
-        type="text"
-        placeholder="Enter Type..."
-        v-model="ofccc.ofccc_Type"
-      />
-    </div>
-    <div class="ui labeled input fluid">
-      <div class="ui label"><i class=""></i>Latitude</div>
-      <input
-        type="number"
-        step="0.000000000000001"
-        placeholder="Enter Latitude..."
-        v-model="ofccc.ofccc_Lat"
-      />
-    </div>
-    <div class="ui labeled input fluid">
-      <div class="ui label"><i class=""></i>Longitude</div>
-      <input
-        type="number"
-        step="0.000000000000001"
-        placeholder="Enter Longitude..."
-        v-model="ofccc.ofccc_Lng"
-      />
-    </div>
-    <!-- Model-List-Select -->
-    <model-list-select
-      :list="pons"
-      v-model="ofccc.pon"
-      option-value="_id"
-      option-text="pon_Name"
-      placeholder="Select PON name"
-    >
-    </model-list-select>
-
-    <button class="positive ui button">Submit</button>
-  </form>
+  <div class="row">
+    <form action="#" @submit.prevent="onSubmit">
+      <div class="column">
+        <p v-if="errorsPresent" class="error">Please fill out both fields!</p>
+        <div class="ui labeled input fluid">
+          <div class="ui label"><i class=""></i>ofccc Name</div>
+          <input
+            type="text"
+            placeholder="Enter ofccc Name..."
+            v-model="ofccc.ofccc_Name"
+          />
+        </div>
+        <div class="ui labeled input fluid">
+          <div class="ui label"><i class=""></i>ofccc Type</div>
+          <input
+            type="text"
+            placeholder="Enter ofccc Type..."
+            v-model="ofccc.ofccc_Type"
+          />
+        </div>
+        <div class="ui labeled input fluid">
+          <div class="ui label"><i class=""></i>Latitude</div>
+          <input
+            type="number"
+            step="0.000000000000001"
+            placeholder="Enter Latitude..."
+            v-model="ofccc.ofccc_Lat"
+          />
+        </div>
+        <div class="ui labeled input fluid">
+          <div class="ui label"><i class=""></i>Longitude</div>
+          <input
+            type="number"
+            step="0.000000000000001"
+            placeholder="Enter Longitude..."
+            v-model="ofccc.ofccc_Lng"
+          />
+        </div>
+        <!-- Model-List-Select -->
+        <model-list-select
+          :list="pons"
+          v-model="ofccc.pon"
+          option-value="_id"
+          option-text="pon_Name"
+          placeholder="Select PON name"
+        >
+        </model-list-select>
+        <button class="positive ui button">Submit</button>
+      </div>
+      <div class="column">
+        <div>
+          <GmapMap
+            :center="center"
+            :zoom="5"
+            map-style-id="roadmap"
+            :options="mapOptions"
+            style="width: 100%; height: 400px"
+            ref="mapRef"
+            @click="handleMapClick"
+          >
+            <GmapMarker
+              :position="marker.position"
+              :clickable="true"
+              :draggable="true"
+              @drag="handleMarkerDrag"
+              @click="panToMarker"
+            />
+          </GmapMap>
+        </div>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -79,11 +103,18 @@ export default {
   data() {
     return {
       errorsPresent: false,
-      pons:[],
+      pons: [],
+      marker: { position: { lat: 0, lng: 0 } },
+      center: { lat: 14.355836188695562, lng: 100.56920170783997 },
+
+      mapOptions: {
+        disableDefaultUI: true,
+      },
     };
   },
   async mounted() {
     this.pons = await api.getpons();
+    this.geolocate();
   },
   methods: {
     onSubmit: function () {
@@ -99,6 +130,38 @@ export default {
         this.$emit("createOrUpdate", this.ofccc);
       }
     },
+    //detects location from browser
+    geolocate() {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.marker.position = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+
+        this.panToMarker();
+      });
+    },
+
+    //sets the position of marker when dragged
+    handleMarkerDrag(e) {
+      this.marker.position = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+      this.ofccc.ofccc_Lat = this.marker.position.lat;
+      this.ofccc.ofccc_Lng = this.marker.position.lng;
+    },
+
+    //Moves the map view port to marker
+    panToMarker() {
+      this.$refs.mapRef.panTo(this.marker.position);
+      this.$refs.mapRef.setZoom(5);
+    },
+
+    //Moves the marker to click position on the map
+    handleMapClick(e) {
+      this.marker.position = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+      this.ofccc.ofccc_Lat = this.marker.position.lat;
+      this.ofccc.ofccc_Lng = this.marker.position.lng;
+      console.log(e);
+    },
   },
   components: {
     ModelListSelect,
@@ -109,5 +172,17 @@ export default {
 <style scoped>
 .error {
   color: red;
+}
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 </style>
