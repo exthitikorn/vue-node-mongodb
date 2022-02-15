@@ -2,7 +2,7 @@
   <div id="app">
     <div class="ui inverted blue segment menu">
       <div class="ui center aligned container">
-        <div class="ui huge secondary inverted menu">
+        <div class="ui large secondary inverted menu">
           <router-link to="/olts" exact class="item">
             <i class="table icon"></i> OLT
           </router-link>
@@ -28,14 +28,14 @@
         </div>
       </div>
     </div>
-    <!-- footer -->
+    <!-- footer
     <footer>
       <div class="ui inverted blue vertical footer segment">
         <div class="ui center aligned container">
           Exthitikorn(This.X) 2022.
         </div>
       </div>
-    </footer>
+    </footer> -->
   </div>
 </template>
 
