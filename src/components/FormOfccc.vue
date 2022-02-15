@@ -29,6 +29,7 @@
             step="0.000000000000001"
             placeholder="Enter Latitude..."
             v-model="ofccc.ofccc_Lat"
+            readonly
           />
         </div>
         <div class="ui labeled input fluid">
@@ -38,6 +39,7 @@
             step="0.000000000000001"
             placeholder="Enter Longitude..."
             v-model="ofccc.ofccc_Lng"
+            readonly
           />
         </div>
         <div class="ui labeled input fluid">
@@ -61,23 +63,25 @@
       </div>
       <div class="column">
         <div>
-          <GmapMap
-            :center="center"
-            :zoom="5"
-            map-style-id="roadmap"
-            :options="mapOptions"
-            style="width: 100%; height: 400px"
-            ref="mapRef"
-            @click="handleMapClick"
-          >
-            <GmapMarker
-              :position="marker.position"
-              :clickable="true"
-              :draggable="true"
-              @drag="handleMarkerDrag"
-              @click="panToMarker"
-            />
-          </GmapMap>
+          <p class="groove">
+            <GmapMap
+              :center="center"
+              :zoom="5"
+              map-style-id="roadmap"
+              :options="mapOptions"
+              style="width: 100%; height: 400px"
+              ref="mapRef"
+              @click="handleMapClick"
+            >
+              <GmapMarker
+                :position="marker.position"
+                :clickable="true"
+                :draggable="true"
+                @drag="handleMarkerDrag"
+                @click="panToMarker"
+              />
+            </GmapMap>
+          </p>
         </div>
       </div>
     </form>
@@ -202,5 +206,8 @@ export default {
   content: "";
   display: table;
   clear: both;
+}
+p.groove {
+  border-style: groove;
 }
 </style>

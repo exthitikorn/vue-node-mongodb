@@ -1,19 +1,21 @@
 <template>
   <div>
-      <h1>Google Map {{ sdp.sdp_Name }}</h1>
+    <h1>Google Map {{ sdp.sdp_Name }}</h1>
+    <p class="groove">
       <GmapMap
-      :center="center"
-      :zoom="16"
-      :options="mapOptions"
-      map-style-id="roadmap"
-      style="width: 100%; height: 600px"
-    >
-      <GmapMarker
-        :position="marker.position"
-        :clickable="false"
-        :draggable="false"
-      />
-    </GmapMap>
+        :center="center"
+        :zoom="16"
+        :options="mapOptions"
+        map-style-id="roadmap"
+        style="width: 100%; height: 600px"
+      >
+        <GmapMarker
+          :position="marker.position"
+          :clickable="false"
+          :draggable="false"
+        />
+      </GmapMap>
+    </p>
     <div class="container6">
       <a onclick="history.back()" class="negative ui button">Back</a>
     </div>
@@ -23,7 +25,7 @@
 <script>
 import { api } from "../helpers/Helpers";
 export default {
-name: "google-map",
+  name: "google-map",
   data() {
     return {
       sdp: "",
@@ -35,21 +37,20 @@ name: "google-map",
       },
     };
   },
-  methods:{
+  methods: {
     setPositionAndCenter(e) {
       this.marker.position.lat = this.sdp.sdp_Lat;
       this.marker.position.lng = this.sdp.sdp_Lng;
       this.center.lat = this.sdp.sdp_Lat;
       this.center.lng = this.sdp.sdp_Lng;
       console.log(e);
-    }
+    },
   },
   async mounted() {
     this.sdp = await api.getsdp(this.$route.params.id);
     this.setPositionAndCenter();
   },
-}
-
+};
 </script>
 
 <style scoped>
@@ -61,5 +62,8 @@ div.container6 {
 }
 div.container6 p {
   margin: 0;
+}
+p.groove {
+  border-style: groove;
 }
 </style>

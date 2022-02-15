@@ -13,36 +13,52 @@
         </div>
         <div class="ui labeled input fluid">
           <div class="ui label">Latitude</div>
-          <input type="number" step="any" v-model="olt.olt_Lat" placeholder="Enter Latitude..." />
+          <input
+            type="number"
+            step="any"
+            v-model="olt.olt_Lat"
+            placeholder="Enter Latitude..."
+            readonly
+          />
         </div>
         <div class="ui labeled input fluid">
           <div class="ui label">Longitude</div>
-          <input type="number" step="any" v-model="olt.olt_Lng" placeholder="Enter Longitude..." />
+          <input
+            type="number"
+            step="any"
+            v-model="olt.olt_Lng"
+            placeholder="Enter Longitude..."
+            readonly
+          />
         </div>
         <table>
           <td><button class="positive ui button">Submit</button></td>
-          <td><a onclick="history.back()" class="negative ui button">Back</a></td>
+          <td>
+            <a onclick="history.back()" class="negative ui button">Back</a>
+          </td>
         </table>
       </div>
       <div class="column">
         <div>
-          <GmapMap
-            :center="center"
-            :zoom="5"
-            map-style-id="roadmap"
-            :options="mapOptions"
-            style="width: 100%; height: 400px"
-            ref="mapRef"
-            @click="handleMapClick"
-          >
-            <GmapMarker
-              :position="marker.position"
-              :clickable="true"
-              :draggable="true"
-              @drag="handleMarkerDrag"
-              @click="panToMarker"
-            />
-          </GmapMap>
+          <p class="groove">
+            <GmapMap
+              :center="center"
+              :zoom="5"
+              map-style-id="roadmap"
+              :options="mapOptions"
+              style="width: 100%; height: 400px"
+              ref="mapRef"
+              @click="handleMapClick"
+            >
+              <GmapMarker
+                :position="marker.position"
+                :clickable="true"
+                :draggable="true"
+                @drag="handleMarkerDrag"
+                @click="panToMarker"
+              />
+            </GmapMap>
+          </p>
         </div>
       </div>
     </form>
@@ -143,5 +159,8 @@ export default {
   content: "";
   display: table;
   clear: both;
+}
+p.groove {
+  border-style: groove;
 }
 </style>

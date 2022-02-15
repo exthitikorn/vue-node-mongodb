@@ -1,19 +1,22 @@
 <template>
   <div>
     <h1>Google Map {{ ofccc.ofccc_Name }}</h1>
-    <GmapMap
-      :center="center"
-      :zoom="16"
-      :options="mapOptions"
-      map-style-id="roadmap"
-      style="width: 100%; height: 600px"
-    >
-      <GmapMarker
-        :position="marker.position"
-        :clickable="false"
-        :draggable="false"
-      />
-    </GmapMap>
+    <p class="groove">
+      <GmapMap
+        :center="center"
+        :zoom="16"
+        :options="mapOptions"
+        map-style-id="roadmap"
+        style="width: 100%; height: 600px"
+      >
+        <GmapMarker
+          :position="marker.position"
+          :clickable="false"
+          :draggable="false"
+        />
+      </GmapMap>
+    </p>
+
     <div class="container6">
       <a onclick="history.back()" class="negative ui button">Back</a>
     </div>
@@ -60,5 +63,8 @@ div.container6 {
 }
 div.container6 p {
   margin: 0;
+}
+p.groove {
+  border-style: groove;
 }
 </style>
