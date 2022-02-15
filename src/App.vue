@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <div class="ui inverted segment navbar">
+    <div class="ui inverted blue segment menu">
       <div class="ui center aligned container">
-        <div class="ui large secondary inverted pointing menu compact">
+        <div class="ui huge secondary inverted menu">
           <router-link to="/olts" exact class="item">
             <i class="table icon"></i> OLT
           </router-link>
@@ -28,6 +28,14 @@
         </div>
       </div>
     </div>
+    <!-- footer -->
+    <footer>
+      <div class="ui inverted blue vertical footer segment">
+        <div class="ui center aligned container">
+          Exthitikorn(This.X) 2022.
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -60,5 +68,15 @@ div.input {
 button.ui.button {
   margin-top: 15px;
   display: block;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  padding-top: 2px;
+  padding-bottom: 20px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 </style>
