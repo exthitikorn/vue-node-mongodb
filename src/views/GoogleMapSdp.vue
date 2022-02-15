@@ -7,7 +7,7 @@
         :zoom="16"
         :options="mapOptions"
         map-style-id="roadmap"
-        style="width: 100%; height: 600px"
+        style="width: 100%; height: 550px"
       >
         <GmapMarker
           :position="marker.position"
