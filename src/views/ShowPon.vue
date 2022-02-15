@@ -10,7 +10,7 @@
             <th>Type</th>
             <th>Latitude</th>
             <th>Longitude</th>
-            <!-- <th>OLT Name</th> -->
+            <th>Location</th>
           </tr>
         </thead>
         <tr v-for="(ofccc, i) in ofcccs" :key="i">
@@ -18,7 +18,10 @@
           <td>{{ ofccc.ofccc_Type }}</td>
           <td>{{ ofccc.ofccc_Lat }}</td>
           <td>{{ ofccc.ofccc_Lng }}</td>
-          <!-- <td>{{ ofccc.olt.olt_Name }}</td> -->
+          <td>
+            <router-link :to="{ name: 'google-map-ofccc', params: { id: ofccc._id } }"
+              >Location</router-link>
+          </td>
         </tr>
       </table>
       <div class="container6">
