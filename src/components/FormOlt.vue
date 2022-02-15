@@ -43,7 +43,7 @@
           <p class="groove">
             <GmapMap
               :center="center"
-              :zoom="18"
+              :zoom="zoom"
               map-style-id="roadmap"
               :options="mapOptions"
               style="width: 100%; height: 400px"
@@ -59,6 +59,11 @@
               />
             </GmapMap>
           </p>
+          <div class="container6">
+            <a v-on:click="geolocate()" class="ui orange button"
+              >Current Location</a
+            >
+          </div>
         </div>
       </div>
     </form>
@@ -84,8 +89,10 @@ export default {
   data() {
     return {
       errorsPresent: false,
-      marker: { position: { lat: 0, lng: 0 } },
-      center: { lat: 0, lng: 0 },
+      currentLocation: { lat: null, lng: null },
+      marker: { position: { lat: null, lng: null } },
+      center: { lat: 13.736717, lng: 100.523186 },
+      zoom: 5,
 
       mapOptions: {
         disableDefaultUI: true,
@@ -108,12 +115,15 @@ export default {
     //detects location from browser
     geolocate() {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.marker.position = {
+        this.currentLocation = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-        this.center.lat = this.marker.position.lat;
-        this.center.lng = this.marker.position.lng;
+        this.marker.position.lat = this.currentLocation.lat;
+        this.marker.position.lng = this.currentLocation.lng;
+        this.olt.olt_Lat = this.currentLocation.lat;
+        this.olt.olt_Lng = this.currentLocation.lng;
+        this.zoom = 18;
 
         this.panToMarker();
       });
@@ -141,7 +151,7 @@ export default {
     },
   },
   mounted() {
-    this.geolocate();
+    // this.geolocate();
   },
 };
 </script>
@@ -161,6 +171,15 @@ export default {
   content: "";
   display: table;
   clear: both;
+}
+div.container6 {
+  height: 5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+div.container6 p {
+  margin: 0;
 }
 p.groove {
   border-style: groove;
