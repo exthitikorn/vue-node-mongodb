@@ -66,7 +66,7 @@
           <p class="groove">
             <GmapMap
               :center="center"
-              :zoom="5"
+              :zoom="15"
               map-style-id="roadmap"
               :options="mapOptions"
               style="width: 100%; height: 400px"
@@ -126,7 +126,7 @@ export default {
         { value: "32 Port" },
       ],
       marker: { position: { lat: 0, lng: 0 } },
-      center: { lat: 14.355836188695562, lng: 100.56920170783997 },
+      center: { lat: 0, lng: 0 },
 
       mapOptions: {
         disableDefaultUI: true,
@@ -158,6 +158,8 @@ export default {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
+        this.center.lat = this.marker.position.lat;
+        this.center.lng = this.marker.position.lng;
 
         this.panToMarker();
       });
