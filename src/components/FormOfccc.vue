@@ -66,7 +66,7 @@
           <p class="groove">
             <GmapMap
               :center="center"
-              :zoom="15"
+              :zoom="18"
               map-style-id="roadmap"
               :options="mapOptions"
               style="width: 100%; height: 400px"
