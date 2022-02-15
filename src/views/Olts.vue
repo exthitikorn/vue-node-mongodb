@@ -33,8 +33,8 @@
             <router-link :to="{ name: 'edit-olt', params: { id: olt._id } }"
               >Edit</router-link>
           </td>
-          <td width="75" class="center aligned" @click.prevent="onDestroy(olt.olt_Name)">
-            <a :href="`/olts/${olt.olt_Name}`">Delete</a>
+          <td width="75" class="center aligned" @click.prevent="onDestroy(olt._id)">
+            <a :href="`/olts/${olt._id}`">Delete</a>
           </td>
         </tr>
       </table>
@@ -58,7 +58,7 @@ export default {
       if (!sure) return;
       await api.deleteolt(id);
       this.flash("OLT deleted sucessfully!", "error");
-      const newolts = this.olts.filter((olt) => olt.olt_Name !== id);
+      const newolts = this.olts.filter((olt) => olt._id !== id);
       this.olts = newolts;
     },
   },
