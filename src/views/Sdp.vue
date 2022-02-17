@@ -2,6 +2,7 @@
   <div>
     <h1>SDP : {{ sdps.length }}</h1>
     <a href="/sdps/new" class="positive ui button">New</a>
+    <a href="/sdps/show" class="ui orange button">SDP around me</a>
     <flash-message></flash-message>
     <br />
     <div v-if="sdps.length > 0">

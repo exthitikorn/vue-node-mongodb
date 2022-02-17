@@ -117,7 +117,7 @@ export default new Router({
       component: NewSdp
     },
     {
-      path: '/sdps/:id',
+      path: '/sdps/show',
       name: 'show-sdp',
       component: ShowSdp
     },
