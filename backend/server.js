@@ -7,11 +7,13 @@ global.Pon = require('./api/models/ponModel');
 global.Ofccc = require('./api/models/ofcccModel');
 global.Sdp = require('./api/models/sdpModel');
 global.User = require('./api/models/userModel');
+global.Customer = require('./api/models/customerModel')
 const oltroutes = require('./api/routes/oltRoutes');
 const ponroutes = require('./api/routes/ponRoutes');
 const ofcccroutes = require('./api/routes/ofcccRoutes');
 const sdproutes = require('./api/routes/sdpRoutes');
 const userroutes = require('./api/routes/userRoutes');
+const customerroutes = require('./api/routes/customerRoutes')
 
 mongoose.connect(
     'mongodb://localhost/testdb',
@@ -30,6 +32,7 @@ ponroutes(app);
 ofcccroutes(app);
 sdproutes(app);
 userroutes(app);
+customerroutes(app);
 
 app.listen(port);
 
