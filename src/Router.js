@@ -20,6 +20,10 @@ import Sdp from './views/Sdp.vue';
 import NewSdp from './views/NewSdp.vue';
 import ShowSdp from './views/ShowSdp.vue';
 import EditSdp from './views/EditSdp.vue';
+//Customer
+import Customer from './views/Customer.vue';
+import NewCustomer from './views/NewCustomer.vue'
+import EditCustomer from './views/EditCustomer.vue'
 //User
 import User from './views/User.vue';
 import NewUser from './views/NewUser.vue';
@@ -125,6 +129,22 @@ export default new Router({
       path: '/sdps/:id/edit',
       name: 'edit-sdp',
       component: EditSdp
+    },
+    //Customer Routes
+    {
+      path: '/customers',
+      name: 'customers',
+      component: Customer
+    },
+    {
+      path: '/customers/new',
+      name: 'new-customers',
+      component: NewCustomer
+    },
+    {
+      path: '/customers/:id/edit',
+      name: 'edit-customers',
+      component: EditCustomer
     },
     //User Routes
     {

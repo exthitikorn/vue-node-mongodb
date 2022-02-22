@@ -15,6 +15,9 @@
           <router-link to="/sdps" exact class="item">
             <i class="table icon"></i> SDP
           </router-link>
+          <router-link to="/customers" exact class="item">
+            <i class="table icon"></i> Customer
+          </router-link>
           <router-link to="/users" exact class="item">
             <i class="table icon"></i> Users
           </router-link>

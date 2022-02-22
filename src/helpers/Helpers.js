@@ -14,6 +14,7 @@ const ponURL = "http://localhost:3000/pons/"
 const ofcccURL = "http://localhost:3000/ofcccs/";
 const sdpURL = "http://localhost:3000/sdps/";
 const userURL = "http://localhost:3000/users/";
+const customerURL = 'http://localhost:3000/customers/'
 
 const handleError = (fn) => (...params) =>
   fn(...params).catch((error) => {
@@ -114,6 +115,27 @@ export const api = {
   }),
   updatesdp: handleError(async (payload) => {
     const res = await axios.put(sdpURL + payload._id, payload);
+    return res.data;
+  }),
+  //Customer api
+  getcuss: handleError(async () => {
+    const res = await axios.get(customerURL);
+    return res.data;
+  }),
+  getcus: handleError(async (id) => {
+    const res = await axios.get(customerURL + id);
+    return res.data;
+  }),
+  deletecus: handleError(async (id) => {
+    const res = await axios.delete(customerURL + id);
+    return res.data;
+  }),
+  createcus: handleError(async (payload) => {
+    const res = await axios.post(customerURL, payload);
+    return res.data;
+  }),
+  updatecus: handleError(async (payload) => {
+    const res = await axios.put(customerURL + payload._id, payload);
     return res.data;
   }),
   //User api
