@@ -97,6 +97,10 @@ export const api = {
     return res.data;
   }),
   //SDP api
+  getcusInsdp: handleError(async (id) => {
+    const res = await axios.get(sdpURL+ 'customers/' + id);
+    return res.data;
+  }),
   getsdp: handleError(async (id) => {
     const res = await axios.get(sdpURL + id);
     return res.data;

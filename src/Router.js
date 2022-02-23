@@ -20,6 +20,7 @@ import Sdp from './views/Sdp.vue';
 import NewSdp from './views/NewSdp.vue';
 import ShowSdp from './views/ShowSdp.vue';
 import EditSdp from './views/EditSdp.vue';
+import Distance from './views/DistanceSdp.vue';
 //Customer
 import Customer from './views/Customer.vue';
 import NewCustomer from './views/NewCustomer.vue'
@@ -121,8 +122,13 @@ export default new Router({
       component: NewSdp
     },
     {
-      path: '/sdps/show',
+      path: '/sdps/distance',
       name: 'show-sdp',
+      component: Distance
+    },
+    {
+      path: '/sdps/customers/:id',
+      name: 'show-sdp-customer',
       component: ShowSdp
     },
     {

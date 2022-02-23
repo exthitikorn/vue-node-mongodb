@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const sdp = mongoose.model('sdp');
+const customer = mongoose.model('customer')
 
 exports.list_all_sdp = (req, res)=>{
     sdp.find({},(err,sdps)=>{
@@ -21,6 +22,13 @@ exports.read_a_sdp = (req, res)=>{
         if(err) res.send(err);
         res.json(sdp);
     }).populate('ofccc')
+}
+
+exports.read_a_customer = (req, res)=>{
+    customer.find({sdp:req.params.sdpId},(err, sdp)=>{
+        if(err) res.send(err);
+        res.json(sdp);
+    })
 }
 
 exports.update_a_sdp = (req, res)=> {

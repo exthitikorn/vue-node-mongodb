@@ -2,7 +2,7 @@
   <div>
     <h1>SDP : {{ sdps.length }}</h1>
     <a href="/sdps/new" class="positive ui button">New</a>
-    <a href="/sdps/show" class="ui orange button">SDP around me</a>
+    <a href="/sdps/distance" class="ui orange button">SDP around me</a>
     <flash-message></flash-message>
     <br />
     <div v-if="sdps.length > 0">
@@ -15,6 +15,7 @@
             <th><i class=""></i>Longitude</th>
             <th><i class=""></i>ofccc Name</th>
             <th class="center aligned"><i class="map marker alternate icon"></i></th>
+            <th class="center aligned"><i class="info circle icon"></i></th>
             <th class="center aligned"><i class="edit icon"></i></th>
             <th class="center aligned"><i class="trash icon"></i></th>
           </tr>
@@ -29,6 +30,10 @@
           <td width="75" class="center aligned">
             <router-link :to="{ name: 'google-map-sdp', params: { id: sdp._id } }"
               >Location</router-link>
+          </td>
+          <td width="120" class="center aligned">
+            <router-link :to="{ name: 'show-sdp-customer', params: { id: sdp._id } }"
+              >Show Customer</router-link>
           </td>
           <td width="75" class="center aligned">
             <router-link :to="{ name: 'edit-sdp', params: { id: sdp._id } }"
