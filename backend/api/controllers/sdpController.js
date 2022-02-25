@@ -52,3 +52,10 @@ exports.delete_a_sdp = (req, res)=>{
         })
     })
 }
+
+exports.distance_a_sdp = (req, res)=>{
+    sdp.find({ loc: { $geoWithin: { $centerSphere: [ [ -88, 30 ], 10/3963.2 ] }}}, (err, sdp) =>{
+        if(err) res.send(err);
+        console.log(sdp)
+    })
+}

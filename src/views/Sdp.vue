@@ -23,8 +23,8 @@
         <tr v-for="(sdp, i) in sdps" :key="i">
           <td>{{ sdp.sdp_Name }}</td>
           <td>{{ sdp.sdp_Type }}</td>
-          <td>{{ sdp.sdp_Lat }}</td>
-          <td>{{ sdp.sdp_Lng }}</td>
+          <td>{{ sdp.loc.sdp_Lat }}</td>
+          <td>{{ sdp.loc.sdp_Lng }}</td>
           <td>{{ sdp.ofccc.ofccc_Name }}</td>
           <!-- ***********************add tel. user*********************** -->
           <td width="75" class="center aligned">

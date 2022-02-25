@@ -39,10 +39,10 @@ export default {
   },
   methods: {
     setPositionAndCenter(e) {
-      this.marker.position.lat = this.sdp.sdp_Lat;
-      this.marker.position.lng = this.sdp.sdp_Lng;
-      this.center.lat = this.sdp.sdp_Lat;
-      this.center.lng = this.sdp.sdp_Lng;
+      this.marker.position.lat = this.sdp.loc.sdp_Lat;
+      this.marker.position.lng = this.sdp.loc.sdp_Lng;
+      this.center.lat = this.sdp.loc.sdp_Lat;
+      this.center.lng = this.sdp.loc.sdp_Lng;
       console.log(e);
     },
   },

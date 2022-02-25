@@ -16,8 +16,8 @@
         <tr v-for="(sdp, i) in sdps" :key="i">
           <td>{{ sdp.sdp_Name }}</td>
           <td>{{ sdp.sdp_Type }}</td>
-          <td>{{ sdp.sdp_Lat }}</td>
-          <td>{{ sdp.sdp_Lng }}</td>
+          <td>{{ sdp.loc.sdp_Lat }}</td>
+          <td>{{ sdp.loc.sdp_Lng }}</td>
           <td>
             <router-link :to="{ name: 'google-map-sdp', params: { id: sdp._id } }"
               >Location</router-link>
