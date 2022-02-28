@@ -57,3 +57,10 @@ exports.delete_a_sdp = (req, res) => {
   });
 };
 
+exports.distance_a_sdp = (req, res) => {
+sdp.find({where: {loc: {near: [100.5698633, 14.3561336], maxDistance: 0.3*1609.344}}},
+    (err, loc) => {
+    if (err) res.send(err);
+    res.json(loc);
+  });
+};
