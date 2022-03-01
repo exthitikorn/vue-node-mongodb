@@ -122,8 +122,8 @@ export default new Router({
       component: NewSdp
     },
     {
-      path: '/sdps/distance',
-      name: 'show-sdp',
+      path: '/distance',
+      name: 'distance',
       component: Distance
     },
     {

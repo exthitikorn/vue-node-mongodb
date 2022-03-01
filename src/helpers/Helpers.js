@@ -9,6 +9,7 @@ Vue.use(VueFlashMessage, {
   },
 });
 const vm = new Vue();
+const baseURL = "http://localhost:3000/";
 const oltURL = "http://localhost:3000/olts/";
 const ponURL = "http://localhost:3000/pons/"
 const ofcccURL = "http://localhost:3000/ofcccs/";
@@ -97,8 +98,12 @@ export const api = {
     return res.data;
   }),
   //SDP api
+  distance: handleError(async (lng , lat) => {
+    const res = await axios.get(baseURL + 'distance/' + lng + '/' + lat);
+    return res.data;
+  }),
   getcusInsdp: handleError(async (id) => {
-    const res = await axios.get(sdpURL+ 'customers/' + id);
+    const res = await axios.get(sdpURL + 'customers/' + id);
     return res.data;
   }),
   getsdp: handleError(async (id) => {

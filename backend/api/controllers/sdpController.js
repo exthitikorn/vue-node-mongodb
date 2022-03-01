@@ -58,17 +58,20 @@ exports.delete_a_sdp = (req, res) => {
 };
 
 exports.distance_a_sdp = (req, res) => {
-  sdp.find(
-    {
-      loc: {
-        $geoWithin: {
-          $centerSphere: [[100.5698664, 14.3561484], 100 / 6378.1],
-        },
+sdp.find(
+  {
+    loc: {
+      $geoWithin: {
+        $centerSphere: [[req.params.lng, req.params.lat], 300/6378100],
       },
     },
-    (err, sdp) => {
-      if (err) res.send(err);
-      res.json(sdp);
-    }
-  );
+  },
+  (err, sdp) => {
+    if (err) res.send(err);
+    res.json(sdp);
+  }
+);
 };
+
+// 0.3*1609.344
+

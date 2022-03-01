@@ -29,8 +29,8 @@ export default {
   data() {
     return {
       sdp: "",
-      marker: { position: { lat: 0, lng: 0 } },
-      center: { lat: 0, lng: 0 },
+      marker: { position: { lat: null, lng: null } },
+      center: { lat: null, lng: null },
 
       mapOptions: {
         disableDefaultUI: true,
@@ -39,10 +39,10 @@ export default {
   },
   methods: {
     setPositionAndCenter(e) {
-      this.marker.position.lat = this.sdp.sdp_Lat;
-      this.marker.position.lng = this.sdp.sdp_Lng;
-      this.center.lat = this.sdp.sdp_Lat;
-      this.center.lng = this.sdp.sdp_Lng;
+      this.marker.position.lat = this.sdp.loc[1];
+      this.marker.position.lng = this.sdp.loc[0];
+      this.center.lat = this.sdp.loc[1];
+      this.center.lng = this.sdp.loc[0];
       console.log(e);
     },
   },

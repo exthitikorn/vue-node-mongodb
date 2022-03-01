@@ -14,6 +14,6 @@ module.exports = app => {
         .route('/sdps/customers/:sdpId')
         .get(sdpBilder.read_a_customer);
     app
-        .route('/distance')
+        .route('/distance/:lng/:lat')
         .get(sdpBilder.distance_a_sdp)
 }

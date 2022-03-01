@@ -2,7 +2,8 @@
   <div>
     <h1>SDP : {{ sdps.length }}</h1>
     <a href="/sdps/new" class="positive ui button">New</a>
-    <a href="/sdps/distance" class="ui orange button">SDP around me</a>
+    <a href="/distance" class="ui orange button">SDP around me</a>
+    <!-- <router-link class="ui orange button" :to="{ name: 'distance', params: { lng: loc.lng, lat: loc.lat } }">Location</router-link> -->
     <flash-message></flash-message>
     <br />
     <div v-if="sdps.length > 0">
@@ -23,8 +24,8 @@
         <tr v-for="(sdp, i) in sdps" :key="i">
           <td>{{ sdp.sdp_Name }}</td>
           <td>{{ sdp.sdp_Type }}</td>
-          <td>{{ sdp.sdp_Lat }}</td>
-          <td>{{ sdp.sdp_Lng }}</td>
+          <td>{{ sdp.loc[1] }}</td>
+          <td>{{ sdp.loc[0] }}</td>
           <td>{{ sdp.ofccc.ofccc_Name }}</td>
           <!-- ***********************add tel. user*********************** -->
           <td width="75" class="center aligned">
