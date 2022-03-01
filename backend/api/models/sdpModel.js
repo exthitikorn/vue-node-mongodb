@@ -13,15 +13,16 @@ const sdpSchema = new Schema(
       type: String,
       required: "Type cannot be blank",
     },
+    sdp_Lat: {
+      type: Number,
+      required: "Latitude cannot be blank",
+    },
+    sdp_Lng: {
+      type: Number,
+      required: "Longitude cannot be blank",
+    },
     loc: {
-      sdp_Lat: {
-        type: Number,
-        required: "Latitude cannot be blank",
-      },
-      sdp_Lng: {
-        type: Number,
-        required: "Longitude cannot be blank",
-      },
+      type: [Number]
     },
     ofccc: {
       type: Schema.Types.ObjectId,
@@ -30,5 +31,7 @@ const sdpSchema = new Schema(
   },
   { collection: "sdp" }
 );
+sdpSchema.index( { loc : "2dsphere" } )
+
 
 module.exports = mongoose.model("sdp", sdpSchema);

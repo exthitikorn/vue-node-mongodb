@@ -54,8 +54,8 @@ export default {
         for (let i = 0; i < this.sdps.length; i++) {
           var lat1 = position.coords.latitude;
           var lng1 = position.coords.longitude;
-          var lat2 = this.sdps[i].loc.sdp_Lat;
-          var lng2 = this.sdps[i].loc.sdp_Lng;
+          var lat2 = this.sdps[i].sdp_Lat;
+          var lng2 = this.sdps[i].sdp_Lng;
           if (lat1 == lat2 && lng1 == lng2) {
             this.dataDist.push({
               _id: this.sdps[i]._id,

@@ -28,7 +28,7 @@
             type="number"
             step="0.000000000000001"
             placeholder="Enter Latitude..."
-            v-model="sdp.loc.sdp_Lat"
+            v-model="sdp.sdp_Lat"
             readonly
           />
         </div>
@@ -38,7 +38,7 @@
             type="number"
             step="0.000000000000001"
             placeholder="Enter Longitude..."
-            v-model="sdp.loc.sdp_Lng"
+            v-model="sdp.sdp_Lng"
             readonly
           />
         </div>
@@ -113,10 +113,8 @@ export default {
         return {
           sdp_Name: "",
           sdp_Type: "",
-          loc: {
-            sdp_Lat: "",
-            sdp_Lng: "",
-          },
+          sdp_Lat: "",
+          sdp_Lng: "",
           ofccc: "",
         };
       },
@@ -151,8 +149,8 @@ export default {
       if (
         this.sdp.sdp_Name === "" ||
         this.sdp.sdp_Type === "" ||
-        this.sdp.loc.sdp_Lat === "" ||
-        this.sdp.loc.sdp_Lng === "" ||
+        this.sdp.sdp_Lat === "" ||
+        this.sdp.sdp_Lng === "" ||
         this.sdp.ofccc === ""
       ) {
         this.errorsPresent = true;
@@ -169,8 +167,8 @@ export default {
         };
         this.marker.position.lat = this.currentLocation.lat;
         this.marker.position.lng = this.currentLocation.lng;
-        this.sdp.loc.sdp_Lat = this.currentLocation.lat;
-        this.sdp.loc.sdp_Lng = this.currentLocation.lng;
+        this.sdp.sdp_Lat = this.currentLocation.lat;
+        this.sdp.sdp_Lng = this.currentLocation.lng;
         this.zoom = 18;
 
         this.panToMarker();
@@ -180,8 +178,8 @@ export default {
     //sets the position of marker when dragged
     handleMarkerDrag(e) {
       this.marker.position = { lat: e.latLng.lat(), lng: e.latLng.lng() };
-      this.sdp.loc.sdp_Lat = this.marker.position.lat;
-      this.sdp.loc.sdp_Lng = this.marker.position.lng;
+      this.sdp.sdp_Lat = this.marker.position.lat;
+      this.sdp.sdp_Lng = this.marker.position.lng;
     },
 
     //Moves the map view port to marker
@@ -193,8 +191,8 @@ export default {
     //Moves the marker to click position on the map
     handleMapClick(e) {
       this.marker.position = { lat: e.latLng.lat(), lng: e.latLng.lng() };
-      this.sdp.loc.sdp_Lat = this.marker.position.lat;
-      this.sdp.loc.sdp_Lng = this.marker.position.lng;
+      this.sdp.sdp_Lat = this.marker.position.lat;
+      this.sdp.sdp_Lng = this.marker.position.lng;
       console.log(e);
     },
   },
