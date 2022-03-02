@@ -122,7 +122,7 @@ export default new Router({
       component: NewSdp
     },
     {
-      path: '/distance',
+      path: '/distance/:lng/:lat',
       name: 'distance',
       component: Distance
     },

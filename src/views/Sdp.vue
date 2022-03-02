@@ -2,8 +2,8 @@
   <div>
     <h1>SDP : {{ sdps.length }}</h1>
     <a href="/sdps/new" class="positive ui button">New</a>
-    <a href="/distance" class="ui orange button">SDP around me</a>
-    <!-- <router-link class="ui orange button" :to="{ name: 'distance', params: { lng: loc.lng, lat: loc.lat } }">Location</router-link> -->
+    <!-- <a href="/distance" class="ui orange button">SDP around me</a> -->
+    <router-link class="ui orange button" :to="{ name: 'distance', params: { lng: loc.lng, lat: loc.lat } }">Location</router-link>
     <flash-message></flash-message>
     <br />
     <div v-if="sdps.length > 0">
@@ -57,6 +57,10 @@ export default {
   data() {
     return {
       sdps: [],
+      loc: {
+        lng: null,
+        lat: null
+      }
     };
   },
   methods: {
@@ -68,9 +72,18 @@ export default {
       const newsdps = this.sdps.filter((sdp) => sdp._id !== id);
       this.sdps = newsdps;
     },
+    geolocate() {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.loc = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+      });
+    },
   },
   async mounted() {
     this.sdps = await api.getsdps();
+    this.geolocate();
   },
 };
 </script>

@@ -100,7 +100,7 @@ export default {
   async mounted() {
     // this.sdps = await api.getsdps();
     this.geolocate();
-    this.dataDist = await api.distance(100.56997312394256, 14.356020071160074);
+    this.dataDist = await api.distance(this.$route.params.lng, this.$route.params.lat);
   },
 };
 </script>
