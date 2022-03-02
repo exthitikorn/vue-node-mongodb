@@ -3,7 +3,7 @@
     <h1>SDP : {{ sdps.length }}</h1>
     <a href="/sdps/new" class="positive ui button">New</a>
     <!-- <a href="/distance" class="ui orange button">SDP around me</a> -->
-    <router-link class="ui orange button" :to="{ name: 'distance', params: { lng: loc.lng, lat: loc.lat } }">Location</router-link>
+    <router-link class="ui orange button" :to="{ name: 'distance', params: { lng: loc.lng, lat: loc.lat } }">SDP around me</router-link>
     <flash-message></flash-message>
     <br />
     <div v-if="sdps.length > 0">
