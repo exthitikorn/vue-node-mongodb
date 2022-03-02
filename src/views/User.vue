@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Users : {{ users.length }}</h1>
-        <a href="/users/new" class="positive ui button">New</a>
+        <a href="/users/new" class="ui blue button">New</a>
         <flash-message></flash-message>
     <br />
     <div v-if="users.length > 0">
@@ -21,13 +21,13 @@
           <td>{{ user.password }}</td>
           <td>{{ user.Line_id }}</td>
           <td width="75" class="center aligned">
-            <router-link :to="{ name: 'show-user', params: { id: user._id } }"> Show</router-link>
+            <router-link class="ui green button" :to="{ name: 'show-user', params: { id: user._id } }"> Show</router-link>
           </td>
           <td width="75" class="center aligned">
-            <router-link :to="{ name: 'edit-user', params: { id: user._id } }"> Edit</router-link>
+            <router-link class="ui orange button" :to="{ name: 'edit-user', params: { id: user._id } }"> Edit</router-link>
           </td>
           <td width="75" class="center aligned" @click.prevent="onDestroy(user._id)">
-            <a :href="`/users/${user._id}`">Delete</a>
+            <a class="ui red button" :href="`/users/${user._id}`">Delete</a>
           </td>
         </tr>
       </table>

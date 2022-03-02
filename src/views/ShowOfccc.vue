@@ -16,10 +16,10 @@
         <tr v-for="(sdp, i) in sdps" :key="i">
           <td>{{ sdp.sdp_Name }}</td>
           <td>{{ sdp.sdp_Type }}</td>
-          <td>{{ sdp.loc.sdp_Lat }}</td>
-          <td>{{ sdp.loc.sdp_Lng }}</td>
-          <td>
-            <router-link :to="{ name: 'google-map-sdp', params: { id: sdp._id } }"
+          <td>{{ sdp.loc[1] }}</td>
+          <td>{{ sdp.loc[0] }}</td>
+          <td class="center aligned">
+            <router-link class="ui teal button" :to="{ name: 'google-map-sdp', params: { id: sdp._id } }"
               >Location</router-link>
           </td>
         </tr>
