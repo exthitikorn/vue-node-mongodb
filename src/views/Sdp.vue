@@ -12,8 +12,8 @@
           <tr>
             <th><i class=""></i>SDP Name</th>
             <th><i class=""></i>Type</th>
-            <th><i class=""></i>Lattitude</th>
-            <th><i class=""></i>Longitude</th>
+            <!-- <th><i class=""></i>Lattitude</th>
+            <th><i class=""></i>Longitude</th> -->
             <th><i class=""></i>ofccc Name</th>
             <th class="center aligned"><i class="map marker alternate icon"></i></th>
             <th class="center aligned"><i class="info circle icon"></i></th>
@@ -24,8 +24,8 @@
         <tr v-for="(sdp, i) in sdps" :key="i">
           <td>{{ sdp.sdp_Name }}</td>
           <td>{{ sdp.sdp_Type }}</td>
-          <td>{{ sdp.loc[1] }}</td>
-          <td>{{ sdp.loc[0] }}</td>
+          <!-- <td>{{ sdp.loc[1] }}</td>
+          <td>{{ sdp.loc[0] }}</td> -->
           <td>{{ sdp.ofccc.ofccc_Name }}</td>
           <!-- ***********************add tel. user*********************** -->
           <td width="75" class="center aligned">
