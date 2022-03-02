@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>PON : {{ pons.length }}</h1>
-    <a href="/pons/new" class="positive ui button">New</a>
+    <a href="/pons/new" class="ui blue button">New</a>
     <flash-message></flash-message>
     <br>
     <div v-if="pons.length > 0">
@@ -26,16 +26,16 @@
           <td>{{ pon.pon_Slot }}</td>
           <td>{{ pon.pon_Port }}</td>
           <td>{{ pon.olt.olt_Name}}</td>
-          <td width="120" class="center aligned">
-            <router-link :to="{ name: 'show-pon-ofccc', params: { id: pon._id } }"
+          <td width="150" class="center aligned">
+            <router-link class="ui green button" :to="{ name: 'show-pon-ofccc', params: { id: pon._id } }"
               >Show ofccc</router-link>
           </td>
           <td width="75" class="center aligned">
-            <router-link :to="{ name: 'edit-pon', params: { id: pon._id } }"
+            <router-link class="ui orange button" :to="{ name: 'edit-pon', params: { id: pon._id } }"
               >Edit</router-link>
           </td>
           <td width="75" class="center aligned" @click.prevent="onDestroy(pon._id)">
-            <a :href="`/pons/${pon._id}`">Delete</a>
+            <a class="ui red button" :href="`/pons/${pon._id}`">Delete</a>
           </td>
         </tr>
       </table>

@@ -1,9 +1,9 @@
 <template>
   <div>
     <h1>SDP : {{ sdps.length }}</h1>
-    <a href="/sdps/new" class="positive ui button">New</a>
+    <a href="/sdps/new" class="ui blue button">New</a>
     <!-- <a href="/distance" class="ui orange button">SDP around me</a> -->
-    <router-link class="ui orange button" :to="{ name: 'distance', params: { lng: loc.lng, lat: loc.lat } }">SDP around me</router-link>
+    <router-link class="ui yellow button" :to="{ name: 'distance', params: { lng: loc.lng, lat: loc.lat } }">SDP around me</router-link>
     <flash-message></flash-message>
     <br />
     <div v-if="sdps.length > 0">
@@ -29,19 +29,19 @@
           <td>{{ sdp.ofccc.ofccc_Name }}</td>
           <!-- ***********************add tel. user*********************** -->
           <td width="75" class="center aligned">
-            <router-link :to="{ name: 'google-map-sdp', params: { id: sdp._id } }"
+            <router-link class="ui teal button" :to="{ name: 'google-map-sdp', params: { id: sdp._id } }"
               >Location</router-link>
           </td>
           <td width="120" class="center aligned">
-            <router-link :to="{ name: 'show-sdp-customer', params: { id: sdp._id } }"
+            <router-link class="ui green button" :to="{ name: 'show-sdp-customer', params: { id: sdp._id } }"
               >Show Customer</router-link>
           </td>
           <td width="75" class="center aligned">
-            <router-link :to="{ name: 'edit-sdp', params: { id: sdp._id } }"
+            <router-link class="ui orange button" :to="{ name: 'edit-sdp', params: { id: sdp._id } }"
               >Edit</router-link>
           </td>
           <td width="75" class="center aligned" @click.prevent="onDestroy(sdp._id)">
-            <a :href="`/sdps/${sdp._id}`">Delete</a>
+            <a class="ui red button" :href="`/sdps/${sdp._id}`">Delete</a>
           </td>
         </tr>
       </table>

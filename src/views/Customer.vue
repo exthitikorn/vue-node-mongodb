@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Customers : {{ customers.length }}</h1>
-    <a href="/customers/new" class="positive ui button">New</a>
+    <a href="/customers/new" class="ui blue button">New</a>
     <flash-message></flash-message>
     <br />
     <div v-if="customers.length > 0">
@@ -20,11 +20,11 @@
           <td>{{ customers.tel }}</td>
           <td>{{ customers.sdp.sdp_Name }}</td>
           <td width="75" class="center aligned">
-            <router-link :to="{ name: 'edit-customers', params: { id: customers._id } }"
+            <router-link class="ui orange button" :to="{ name: 'edit-customers', params: { id: customers._id } }"
               >Edit</router-link>
           </td>
           <td width="75" class="center aligned" @click.prevent="onDestroy(customers._id)">
-            <a :href="`/customers/${customers._id}`">Delete</a>
+            <a class="ui red button" :href="`/customers/${customers._id}`">Delete</a>
           </td>
         </tr>
       </table>
