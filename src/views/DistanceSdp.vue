@@ -1,6 +1,22 @@
 <template>
   <div>
-    <h1>SDP around me</h1>
+    <h1>SDP around me {{ setMarker() }}</h1>
+    <p class="groove">
+      <GmapMap
+        :center="currentLocation"
+        :zoom="18"
+        :options="mapOptions"
+        map-style-id="roadmap"
+        style="width: 100%; height: 550px"
+      >
+      <GmapMarker
+        v-for="(marker, i) in setMarker()" :key="i"
+        :position="marker.position"
+        :clickable="true"
+        :draggable="false"
+      />
+      </GmapMap>
+    </p>
     <div v-if="dataLoc.length > 0">
       <table class="ui celled compact table">
         <thead>
@@ -41,9 +57,25 @@ export default {
       currentLocation: { lat: null, lng: null },
       dataDist: [],
       dataLoc: [],
+      mapOptions: {
+        disableDefaultUI: true,
+      },
     };
   },
   methods: {
+    //Set marker
+    setMarker() {
+      var marker = [];
+      for (let i = 0; i < this.dataLoc.length; i++) {
+        marker.push({
+          position: {
+            lat: this.dataLoc[i].lat,
+            lng: this.dataLoc[i].lng,
+          },
+        });
+      }
+      return marker;
+    },
 
     //Sort data
     sortedDataLoc: function (arr) {
@@ -115,6 +147,7 @@ export default {
       this.$route.params.lat
     );
     this.distance();
+    this.setMarker();
   },
 };
 </script>
