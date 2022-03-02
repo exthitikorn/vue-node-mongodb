@@ -12,7 +12,7 @@
             </th>
           </tr>
         </thead>
-        <tr v-for="(dataLoc, i) in even(dataLoc)" :key="i">
+        <tr v-for="(dataLoc, i) in sortedDataLoc(dataLoc)" :key="i">
           <td>{{ dataLoc.name }}</td>
           <td>{{ dataLoc.dist }} Meter</td>
           <td width="120" class="center aligned">
@@ -44,17 +44,20 @@ export default {
     };
   },
   methods: {
+
+    //Test
+    // sortedDataLoc() {
+    //   return this.dataLoc.sort((a, b) => a.dist - b.dist);
+    // },
+
     //Sort data
-    sortedDataLoc() {
-      return this.dataLoc.sort((a, b) => a.dist - b.dist);
-    },
-    //test
-    even: function(arr) {
+    sortedDataLoc: function (arr) {
       // Set slice() to avoid to generate an infinite loop!
-      return arr.slice().sort(function(a, b) {
+      return arr.slice().sort(function (a, b) {
         return a.dist - b.dist;
       });
     },
+
     //detects location from browser
     geolocate() {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -64,6 +67,7 @@ export default {
         };
       });
     },
+    
     //Calculate distance
     distance() {
       for (let i = 0; i < this.dataDist.length; i++) {
