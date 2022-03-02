@@ -62,7 +62,7 @@ sdp.find(
   {
     loc: {
       $geoWithin: {
-        $centerSphere: [[req.params.lng, req.params.lat], 300/6378100],
+        $centerSphere: [[req.params.lng, req.params.lat], 0.3/6378.1],
       },
     },
   },
