@@ -45,11 +45,6 @@ export default {
   },
   methods: {
 
-    //Test
-    // sortedDataLoc() {
-    //   return this.dataLoc.sort((a, b) => a.dist - b.dist);
-    // },
-
     //Sort data
     sortedDataLoc: function (arr) {
       // Set slice() to avoid to generate an infinite loop!
@@ -67,7 +62,7 @@ export default {
         };
       });
     },
-    
+
     //Calculate distance
     distance() {
       for (let i = 0; i < this.dataDist.length; i++) {
