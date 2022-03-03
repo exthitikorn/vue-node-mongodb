@@ -1,27 +1,27 @@
 <template>
   <div>
-    <h1>SDP around me {{ setMarker() }}</h1>
+    <h1>SDP around me</h1>
+    <div v-if="dataLoc.length > 0">
     <p class="groove">
       <GmapMap
         :center="currentLocation"
-        :zoom="18"
+        :zoom="zoom"
         :options="mapOptions"
         map-style-id="roadmap"
         style="width: 100%; height: 550px"
       >
       <GmapMarker
-        v-for="(marker, i) in setMarker()" :key="i"
-        :position="marker.position"
-        :clickable="true"
-        :draggable="false"
+        v-for="(markers, i) in setMarker()" :key="i"
+        :position="markers.position"
       />
       </GmapMap>
     </p>
-    <div v-if="dataLoc.length > 0">
       <table class="ui celled compact table">
         <thead>
           <tr>
             <th><i class=""></i>SDP name</th>
+            <!-- <th><i class=""></i>lat</th>
+            <th><i class=""></i>lng</th> -->
             <th><i class=""></i>Distance</th>
             <th class="center aligned">
               <i class="map marker alternate icon"></i>
@@ -30,12 +30,14 @@
         </thead>
         <tr v-for="(dataLoc, i) in sortedDataLoc(dataLoc)" :key="i">
           <td>{{ dataLoc.name }}</td>
+          <!-- <td>{{ dataLoc.lat }}</td>
+          <td>{{ dataLoc.lng }}</td> -->
           <td>{{ dataLoc.dist }} Meter</td>
           <td width="120" class="center aligned">
-            <router-link
-              :to="{ name: 'google-map-sdp', params: { id: dataLoc._id } }"
+            <a v-on:click="changeCenter(dataLoc.lat, dataLoc.lng)" class="ui teal button">Location</a>
+            <!-- <router-link class="ui teal button" :to="{ name: 'google-map-sdp', params: { id: dataLoc._id } }"
               >Location</router-link
-            >
+            > -->
           </td>
         </tr>
       </table>
@@ -57,24 +59,35 @@ export default {
       currentLocation: { lat: null, lng: null },
       dataDist: [],
       dataLoc: [],
+      center: { lat: null, lng: null },
+      zoom: 18,
       mapOptions: {
         disableDefaultUI: true,
       },
     };
   },
   methods: {
+    //Set center
+    changeCenter(lat, lng) {
+      this.currentLocation.lat = lat
+      this.currentLocation.lng = lng
+      this.zoom = 19
+
+      this.$refs.mapRef.panTo(this.currentLocation);
+    },
+
     //Set marker
     setMarker() {
-      var marker = [];
-      for (let i = 0; i < this.dataLoc.length; i++) {
-        marker.push({
+      var markers = [];
+      for (let i = 0; i < this.dataDist.length; i++) {
+        markers.push({
           position: {
-            lat: this.dataLoc[i].lat,
-            lng: this.dataLoc[i].lng,
-          },
+            lat: this.dataDist[i].loc[1],
+            lng: this.dataDist[i].loc[0]
+          }
         });
       }
-      return marker;
+      return markers;
     },
 
     //Sort data
@@ -93,6 +106,8 @@ export default {
           lng: position.coords.longitude,
         };
       });
+      this.center.lat = this.currentLocation.lat
+      this.center.lng = this.currentLocation.lng
     },
 
     //Calculate distance
@@ -106,8 +121,8 @@ export default {
           this.dataLoc.push({
             _id: this.dataDist[i]._id,
             name: this.dataDist[i].sdp_Name,
-            lat: lat1,
-            lng: lng1,
+            lat: lat2,
+            lng: lng2,
             dist: 0,
           });
         } else {
@@ -129,25 +144,25 @@ export default {
               this.dataLoc.push({
                 _id: this.dataDist[i]._id,
                 name: this.dataDist[i].sdp_Name,
-                lat: lat1,
-                lng: lng1,
+                lat: lat2,
+                lng: lng2,
                 dist: dist.toFixed(0),
               });
             }
           }
         }
       }
+      this.setMarker();
     },
   },
   async mounted() {
-    // this.sdps = await api.getsdps();
     this.geolocate();
     this.dataDist = await api.distance(
       this.$route.params.lng,
       this.$route.params.lat
     );
     this.distance();
-    this.setMarker();
+    
   },
 };
 </script>
