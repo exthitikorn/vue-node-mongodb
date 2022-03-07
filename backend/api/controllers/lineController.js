@@ -1,28 +1,8 @@
 const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-
+const mongoose = require("mongoose");
+const sdp = mongoose.model("sdp");
 //line
 const line = require('@line/bot-sdk');
-
-global.Olt = require('./api/models/oltModel');
-global.Pon = require('./api/models/ponModel');
-global.Ofccc = require('./api/models/ofcccModel');
-global.Sdp = require('./api/models/sdpModel');
-global.User = require('./api/models/userModel');
-global.Customer = require('./api/models/customerModel')
-const oltroutes = require('./api/routes/oltRoutes');
-const ponroutes = require('./api/routes/ponRoutes');
-const ofcccroutes = require('./api/routes/ofcccRoutes');
-const sdproutes = require('./api/routes/sdpRoutes');
-const userroutes = require('./api/routes/userRoutes');
-const customerroutes = require('./api/routes/customerRoutes');
-
-mongoose.connect(
-    'mongodb://localhost/testdb',
-    { useNewUrlParser: true }
-)
 
 // create LINE SDK config from env variables
 const config = {
@@ -61,23 +41,18 @@ app.post('/callback', line.middleware(config), (req, res) => {
     return client.replyMessage(event.replyToken, echo);
   }
 
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended:true }))
-app.use(bodyParser.json())
-
-oltroutes(app);
-ponroutes(app);
-ofcccroutes(app);
-sdproutes(app);
-userroutes(app);
-customerroutes(app);
-
-
-const port = process.env.PORT || 3000;
-app.listen(port);
-
-app.use((req, res)=>{
-    res.status(404).send({url: `${req.originalUrl} not found`})
-})
-
-console.log(`Server started on port ${port}`);
+exports.distance_a_sdp = (req, res) => {
+    sdp.find(
+      {
+        loc: {
+          $geoWithin: {
+            $centerSphere: [[req.params.lng, req.params.lat], 0.3/6378.1],
+          },
+        },
+      },
+      (err, sdp) => {
+        if (err) res.send(err);
+        res.json(sdp);
+      }
+    );
+    };
