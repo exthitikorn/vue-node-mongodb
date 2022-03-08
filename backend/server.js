@@ -1,34 +1,33 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 //line
-const line = require('@line/bot-sdk');
+const line = require("@line/bot-sdk");
+const restClient = new (require('node-rest-client').Client)
 
-global.Olt = require('./api/models/oltModel');
-global.Pon = require('./api/models/ponModel');
-global.Ofccc = require('./api/models/ofcccModel');
-global.Sdp = require('./api/models/sdpModel');
-global.User = require('./api/models/userModel');
-global.Customer = require('./api/models/customerModel')
-const oltroutes = require('./api/routes/oltRoutes');
-const ponroutes = require('./api/routes/ponRoutes');
-const ofcccroutes = require('./api/routes/ofcccRoutes');
-const sdproutes = require('./api/routes/sdpRoutes');
-const userroutes = require('./api/routes/userRoutes');
-const customerroutes = require('./api/routes/customerRoutes');
+global.Olt = require("./api/models/oltModel");
+global.Pon = require("./api/models/ponModel");
+global.Ofccc = require("./api/models/ofcccModel");
+global.Sdp = require("./api/models/sdpModel");
+global.User = require("./api/models/userModel");
+global.Customer = require("./api/models/customerModel");
+const oltroutes = require("./api/routes/oltRoutes");
+const ponroutes = require("./api/routes/ponRoutes");
+const ofcccroutes = require("./api/routes/ofcccRoutes");
+const sdproutes = require("./api/routes/sdpRoutes");
+const userroutes = require("./api/routes/userRoutes");
+const customerroutes = require("./api/routes/customerRoutes");
 
-mongoose.connect(
-    'mongodb://localhost/testdb',
-    { useNewUrlParser: true }
-)
+mongoose.connect("mongodb://localhost/testdb", { useNewUrlParser: true });
 
 // create LINE SDK config from env variables
 const config = {
-    channelAccessToken: "cYfzKor30wSXJ2zFxWUuWOSVrGoXeEFOZ8tOrVYCaSQNFEyHFfSfaEQuTwX1iizELsc14cJRyDYSvWPgivN65mJGzKfaXRAJmWeeL5GgEpmokonIibB2ZmgaCll7sxMH6ACQTqSQipjDnWBf6GED9wdB04t89/1O/w1cDnyilFU=",
-    channelSecret: "a6e65fff4edee9c6edd059836ac28471",
-  };
+  channelAccessToken:
+    "cYfzKor30wSXJ2zFxWUuWOSVrGoXeEFOZ8tOrVYCaSQNFEyHFfSfaEQuTwX1iizELsc14cJRyDYSvWPgivN65mJGzKfaXRAJmWeeL5GgEpmokonIibB2ZmgaCll7sxMH6ACQTqSQipjDnWBf6GED9wdB04t89/1O/w1cDnyilFU=",
+  channelSecret: "a6e65fff4edee9c6edd059836ac28471",
+};
 
 // create LINE SDK client
 const client = new line.Client(config);
@@ -37,33 +36,70 @@ const app = express();
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
-app.post('/callback', line.middleware(config), (req, res) => {
-    Promise
-      .all(req.body.events.map(handleEvent))
-      .then((result) => res.json(result))
-      .catch((err) => {
-        console.error(err);
-        res.status(500).end();
-      });
-  });
-  
-  // event handler
-  function handleEvent(event) {
-    if (event.type !== 'message' || event.message.type !== 'text') {
-      // ignore non-text-message event
-      return Promise.resolve(null);
-    }
-  
-    // create a echoing text message
-    const echo = { type: 'text', text: event.message.text };
-  
-    // use reply API
-    return client.replyMessage(event.replyToken, echo);
+app.post("/callback", line.middleware(config), (req, res) => {
+  Promise.all(req.body.events.map(handleEvent))
+    .then((result) => res.json(result))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).end();
+    });
+});
+
+// event handler
+function handleEvent(event) {
+  if (event.message.type !== "location") {
+    // ignore non-text-message event
+    return Promise.resolve(null);
   }
+  const apiUrl = "https://fa01-2001-fb1-153-fce2-2d2a-4b7a-15ef-d335.ngrok.io/distance";
+  // return new Promise((resolve, reject) => {
+  //   restClient.get(
+  //     `${apiUrl}/${event.message.longitude}/${event.message.latitude}`,
+  //     (data, response) => { 
+  //       console.log(data)
+  //       if (data) {
+  //         const pinData = data.map((row) => ({
+  //           imageBackgroundColor: "#FFFFFF",
+  //           title: `SDP name : ${row.sdp_Name}`,
+  //           text: `Type : ${row.sdp_Type}`,
+  //         }));
+
+  //         var msg = {
+  //           type: "template",
+  //           altText: "ข้อมูลสถานที่",
+  //           template: {
+  //             type: "carousel",
+  //             columns: pinData,
+  //           },
+  //         };
+  //         console.log(msg)
+  //         resolve(client.replyMessage(event.replyToken, msg));
+  //       } else {
+  //         reject();
+  //       }
+  //     }
+  //   );
+  // });
+
+  restClient.get(`${apiUrl}/${event.message.longitude}/${event.message.latitude}`,(data, response) => {
+    console.log(data)
+  });
+  // create a echoing message
+  const echo = {
+    type: "location",
+    title: "my location",
+    address: event.message.address,
+    latitude: event.message.latitude,
+    longitude: event.message.longitude,
+  };
+  console.log(echo)
+  // use reply API
+  return client.replyMessage(event.replyToken, echo);
+}
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended:true }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 oltroutes(app);
 ponroutes(app);
@@ -72,12 +108,11 @@ sdproutes(app);
 userroutes(app);
 customerroutes(app);
 
-
 const port = process.env.PORT || 3000;
 app.listen(port);
 
-app.use((req, res)=>{
-    res.status(404).send({url: `${req.originalUrl} not found`})
-})
+app.use((req, res) => {
+  res.status(404).send({ url: `${req.originalUrl} not found` });
+});
 
 console.log(`Server started on port ${port}`);
