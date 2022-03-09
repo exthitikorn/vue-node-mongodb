@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 
 //line
 const line = require("@line/bot-sdk");
-const restClient = new (require('node-rest-client').Client)
+const restClient = new (require("node-rest-client").Client)();
 
 global.Olt = require("./api/models/oltModel");
 global.Pon = require("./api/models/ponModel");
@@ -51,50 +51,32 @@ function handleEvent(event) {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
-  const apiUrl = "https://fa01-2001-fb1-153-fce2-2d2a-4b7a-15ef-d335.ngrok.io/distance";
-  // return new Promise((resolve, reject) => {
-  //   restClient.get(
-  //     `${apiUrl}/${event.message.longitude}/${event.message.latitude}`,
-  //     (data, response) => { 
-  //       console.log(data)
-  //       if (data) {
-  //         const pinData = data.map((row) => ({
-  //           imageBackgroundColor: "#FFFFFF",
-  //           title: `SDP name : ${row.sdp_Name}`,
-  //           text: `Type : ${row.sdp_Type}`,
-  //         }));
+  const apiUrl =
+    "https://4c90-2001-fb1-153-fce2-ccd9-4942-f6be-69d.ngrok.io/distance";
 
-  //         var msg = {
-  //           type: "template",
-  //           altText: "ข้อมูลสถานที่",
-  //           template: {
-  //             type: "carousel",
-  //             columns: pinData,
-  //           },
-  //         };
-  //         console.log(msg)
-  //         resolve(client.replyMessage(event.replyToken, msg));
-  //       } else {
-  //         reject();
-  //       }
-  //     }
-  //   );
-  // });
-
-  restClient.get(`${apiUrl}/${event.message.longitude}/${event.message.latitude}`,(data, response) => {
-    console.log(data)
+  return new Promise((resolve) => {
+    restClient.get(
+      `${apiUrl}/${event.message.longitude}/${event.message.latitude}`,
+      (data) => {
+        const locData = [];
+        for (let i = 0; i < data.length; i++) {
+          locData.push({
+            name: data[i].sdp_Name,
+            type: data[i].sdp_Type,
+          });
+        }
+        console.log(locData);
+        // create a data test
+        const pinData = locData.map((row) => (
+          {
+            "type": "text",
+            "text": row.name,
+        }
+        ));
+        resolve(client.replyMessage(event.replyToken, pinData))
+      }
+    );
   });
-  // create a echoing message
-  const echo = {
-    type: "location",
-    title: "my location",
-    address: event.message.address,
-    latitude: event.message.latitude,
-    longitude: event.message.longitude,
-  };
-  console.log(echo)
-  // use reply API
-  return client.replyMessage(event.replyToken, echo);
 }
 
 app.use(cors());
