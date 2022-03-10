@@ -52,7 +52,7 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   const apiUrl =
-    "https://4c90-2001-fb1-153-fce2-ccd9-4942-f6be-69d.ngrok.io/distance";
+    "https://6a03-2001-fb1-153-fce2-c076-3c8b-bc41-9c44.ngrok.io/distance"; //API URL
 
   return new Promise((resolve) => {
     restClient.get(
@@ -61,19 +61,46 @@ function handleEvent(event) {
         const locData = [];
         for (let i = 0; i < data.length; i++) {
           locData.push({
+            _id: data[i]._id,
             name: data[i].sdp_Name,
             type: data[i].sdp_Type,
           });
         }
-        console.log(locData);
+        // console.log(locData);
         // create a data test
         const pinData = locData.map((row) => (
+          //test
           {
-            "type": "text",
-            "text": row.name,
-        }
+            "imageBackgroundColor": "#FFFFFF",
+            "title": row.name,
+            "text": row.type,
+            "actions": [
+              {
+                "type": "uri",
+                "label": "Location",
+                "uri": "https://6a03-2001-fb1-153-fce2-c076-3c8b-bc41-9c44.ngrok.io/sdps/"
+
+              }
+            ]
+          }
+          //test
+        //   {
+        //     "type": "text",
+        //     "text": row.name,
+        // }
         ));
-        resolve(client.replyMessage(event.replyToken, pinData))
+        // console.log(pinData)
+        const msg = {
+          "type": "template",
+          "altText": "ข้อมูลสถานที่",
+          "template": {
+            "type": "carousel",
+            "columns": pinData,
+            "imageAspectRatio": "rectangle",
+            "imageSize": "cover"
+          }
+        }
+        resolve(client.replyMessage(event.replyToken, msg))
       }
     );
   });
