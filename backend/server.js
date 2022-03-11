@@ -52,42 +52,68 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   const apiUrl =
-    "https://6a03-2001-fb1-153-fce2-c076-3c8b-bc41-9c44.ngrok.io/distance"; //API URL
+    "https://9a22-2001-fb1-151-b8f4-ece5-84ee-dbbe-46ed.ngrok.io/distance"; //API URL
 
   return new Promise((resolve) => {
     restClient.get(
       `${apiUrl}/${event.message.longitude}/${event.message.latitude}`,
       (data) => {
         const locData = [];
+        
         for (let i = 0; i < data.length; i++) {
+          // Difine variable
+          var lat1 = event.message.latitude;
+          var lng1 = event.message.longitude;
+          var lat2 = data[i].loc[1];
+          var lng2 = data[i].loc[0];
+
+          // Calaulate distance
+          var radlat1 = (Math.PI * lat1) / 180;
+          var radlat2 = (Math.PI * lat2) / 180;
+          var theta = lng1 - lng2;
+          var radtheta = (Math.PI * theta) / 180;
+          var dist =
+            Math.sin(radlat1) * Math.sin(radlat2) +
+            Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+          if (dist > 1) {
+            dist = 1;
+          } else {
+            dist = Math.acos(dist);
+            dist = (dist * 180) / Math.PI;
+            dist = dist * 60 * 1.1515;
+            dist = dist * 1609.344;
+          }
           locData.push({
             _id: data[i]._id,
             name: data[i].sdp_Name,
             type: data[i].sdp_Type,
+            lat: data[i].loc[1],
+            lng: data[i].loc[0],
+            dist: dist.toFixed(0),
           });
         }
-        // console.log(locData);
+      
+        //Sort data
+        locData.sort(function(a, b){return a.dist - b.dist});
+
+        console.log(locData);
+
         // create a data test
         const pinData = locData.map((row) => (
           //test
           {
             "imageBackgroundColor": "#FFFFFF",
             "title": row.name,
-            "text": row.type,
+            "text": `ระยะห่าง : ${row.dist}`,
             "actions": [
               {
                 "type": "uri",
                 "label": "Location",
-                "uri": "https://6a03-2001-fb1-153-fce2-c076-3c8b-bc41-9c44.ngrok.io/sdps/"
+                "uri": `http://maps.google.com/maps?q=${row.lat},${row.lng}`
 
               }
             ]
           }
-          //test
-        //   {
-        //     "type": "text",
-        //     "text": row.name,
-        // }
         ));
         // console.log(pinData)
         const msg = {
