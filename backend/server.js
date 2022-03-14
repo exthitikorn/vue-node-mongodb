@@ -52,7 +52,7 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   const apiUrl =
-    "https://9a22-2001-fb1-151-b8f4-ece5-84ee-dbbe-46ed.ngrok.io/distance"; //API URL
+    "https://cbf7-2001-fb1-151-b8f4-8542-817-9270-926d.ngrok.io/distance"; //API URL
 
   return new Promise((resolve) => {
     restClient.get(
@@ -102,6 +102,7 @@ function handleEvent(event) {
         const pinData = locData.map((row) => (
           //test
           {
+            "thumbnailImageUrl": "https://i.ibb.co/hcM88Yv/58800405-1183115525189846-7696496276770127872-n.png",
             "imageBackgroundColor": "#FFFFFF",
             "title": row.name,
             "text": `ระยะห่าง : ${row.dist}`,
