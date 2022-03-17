@@ -149,8 +149,6 @@ export default {
       if (
         this.sdp.sdp_Name === "" ||
         this.sdp.sdp_Type === "" ||
-        // this.sdp.sdp_Lat === "" ||
-        // this.sdp.sdp_Lng === "" ||
         this.sdp.loc === "" ||
         this.sdp.ofccc === ""
       ) {

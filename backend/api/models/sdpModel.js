@@ -13,14 +13,6 @@ const sdpSchema = new Schema(
       type: String,
       required: "Type cannot be blank",
     },
-    // sdp_Lat: {
-    //   type: Number,
-    //   required: "Latitude cannot be blank",
-    // },
-    // sdp_Lng: {
-    //   type: Number,
-    //   required: "Longitude cannot be blank",
-    // },
     loc: [
       { 
         type: Number,

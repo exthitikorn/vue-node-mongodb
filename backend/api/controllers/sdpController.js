@@ -58,19 +58,50 @@ exports.delete_a_sdp = (req, res) => {
 };
 
 exports.distance_a_sdp = (req, res) => {
-sdp.find(
-  {
-    loc: {
-      $geoWithin: {
-        $centerSphere: [[req.params.lng, req.params.lat], 0.3/6378.1],
+  // lat lng distance
+  sdp
+    .find(
+      {
+        loc: {
+          $geoWithin: {
+            $centerSphere: [[req.params.lng, req.params.lat], 0.3 / 6378.1],
+          },
+        },
       },
-    },
-  },
-  (err, sdp) => {
-    if (err) res.send(err);
-    res.json(sdp);
-  }
-);
+      (err, sdp) => {
+        if (err) res.send(err);
+        res.json(sdp);
+      }
+    )
+    .populate({
+      path: "ofccc",
+      populate: {
+        path: "pon",
+        populate: { path: "olt" },
+      },
+    });
+
+  // customer populate
+  // sdp.aggregate(
+  //   [
+  //     {
+  //       $lookup: {
+  //         from: "customer",
+  //         localField: "_id",
+  //         foreignField: "sdp",
+  //         as: "customer_info",
+  //       },
+  //     },
+  //     {
+  //       $unwind: "$customer_info",
+  //     },
+  //   ],
+  //   (err, sdp) => {
+  //     if (err) res.send(err);
+  //     res.json(sdp);
+  //   }
+  // );
+
 };
 
 // 0.3*1609.344

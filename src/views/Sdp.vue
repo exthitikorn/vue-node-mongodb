@@ -34,7 +34,7 @@
           </td>
           <td width="120" class="center aligned">
             <router-link class="ui green button" :to="{ name: 'show-sdp-customer', params: { id: sdp._id } }"
-              >Show Customer</router-link>
+              >Customer</router-link>
           </td>
           <td width="75" class="center aligned">
             <router-link class="ui orange button" :to="{ name: 'edit-sdp', params: { id: sdp._id } }"

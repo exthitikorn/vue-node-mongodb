@@ -5,12 +5,13 @@
     <flash-message></flash-message>
     <br>
     <div v-if="olts.length > 0">
+      <div class="ui input fluid">
+        <input type="text" v-model="search" placeholder="Search">
+      </div>
       <table id="olts" class="ui celled table">
         <thead>
           <tr>
             <th>OLT Name</th>
-            <!-- <th>Latitude</th>
-            <th>Longitude</th> -->
             <th class="center aligned"><i class="map marker alternate icon"></i></th>
             <th class="center aligned"><i class="info circle icon"></i></th>
             <th class="center aligned"><i class="edit icon"></i></th>
@@ -19,8 +20,6 @@
         </thead>
         <tr v-for="(olt, i) in olts" :key="i">
           <td>{{ olt.olt_Name }}</td>
-          <!-- <td>{{ olt.olt_Lat }}</td>
-          <td>{{ olt.olt_Lng }}</td> -->
           <td width="75" class="center aligned">
             <router-link class="ui teal button" :to="{ name: 'google-map-olt', params: { id: olt._id } }"
               >Location</router-link>
@@ -50,6 +49,7 @@ export default {
   data() {
     return {
       olts: [],
+      search: "",
     };
   },
   methods: {
@@ -67,3 +67,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+</style>
