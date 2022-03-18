@@ -7,7 +7,7 @@ exports.list_all_cus = (req, res) => {
       if (err) res.send(err);
       res.json(cuss);
     })
-    // .populate('sdp')
+    .populate('sdp')
     // .populate({
     //   path: "sdp",
     //   populate: {
