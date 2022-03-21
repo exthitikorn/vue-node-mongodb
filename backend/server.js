@@ -53,7 +53,7 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   const apiUrl =
-    "https://2a3d-2001-fb1-150-7889-6d11-b4f9-eb55-3ba2.ngrok.io/distance"; //API URL
+    "https://c59e-2001-fb1-152-267-281b-ec6a-6d7a-6e3c.ngrok.io/distance"; //API URL
 
   return new Promise((resolve) => {
     // customer
@@ -72,7 +72,7 @@ function handleEvent(event) {
     //   }
     // );
     restClient.get(
-      `https://2a3d-2001-fb1-150-7889-6d11-b4f9-eb55-3ba2.ngrok.io/customers/`,
+      `https://c59e-2001-fb1-152-267-281b-ec6a-6d7a-6e3c.ngrok.io/customers/`,
       (cus) => {
         // console.log(cus)
 
@@ -125,7 +125,7 @@ function handleEvent(event) {
               });
             }
 
-            console.log(cusData[1].sdp._id);
+            // console.log(cusData[1].sdp._id);
 
             //Sort data
             locData.sort(function(a, b) {
@@ -134,28 +134,28 @@ function handleEvent(event) {
 
             // console.log(locData);
 
-            const telData = cusData.map((row) => ({
-              type: "box",
-              layout: "baseline",
-              spacing: "sm",
-              contents: [
-                {
-                  type: "text",
-                  text: "Tel. ",
-                  color: "#aaaaaa",
-                  size: "sm",
-                  flex: 1,
-                },
-                {
-                  type: "text",
-                  text: row.tel,
-                  wrap: true,
-                  color: "#666666",
-                  size: "sm",
-                  flex: 5,
-                },
-              ],
-            }));
+            // const telData = cusData.map((row) => ({
+            //   type: "box",
+            //   layout: "baseline",
+            //   spacing: "sm",
+            //   contents: [
+            //     {
+            //       type: "text",
+            //       text: "Tel. ",
+            //       color: "#aaaaaa",
+            //       size: "sm",
+            //       flex: 1,
+            //     },
+            //     {
+            //       type: "text",
+            //       text: row.tel,
+            //       wrap: true,
+            //       color: "#666666",
+            //       size: "sm",
+            //       flex: 5,
+            //     },
+            //   ],
+            // }));
             // console.log(telData);
             // create a data
             const contentsData = locData.map((row) => ({
@@ -257,19 +257,19 @@ function handleEvent(event) {
                       {
                         type: "separator",
                       },
-                      {
-                        type: "text",
-                        text: "ข้อมูลหมายเลข",
-                        size: "lg",
-                        align: "center",
-                      },
-                      {
-                        type: "box",
-                        layout: "vertical",
-                        margin: "lg",
-                        spacing: "sm",
-                        contents: telData,
-                      },
+                      // {
+                      //   type: "text",
+                      //   text: "ข้อมูลหมายเลข",
+                      //   size: "lg",
+                      //   align: "center",
+                      // },
+                      // {
+                      //   type: "box",
+                      //   layout: "vertical",
+                      //   margin: "lg",
+                      //   spacing: "sm",
+                      //   contents: telData,
+                      // },
                     ],
                   },
                 ],
@@ -279,6 +279,16 @@ function handleEvent(event) {
                 layout: "vertical",
                 spacing: "sm",
                 contents: [
+                  {
+                    type: "button",
+                    style: "link",
+                    height: "sm",
+                    action: {
+                      type: "uri",
+                      label: "หมายเลขโทรศัพท์",
+                      uri: `https://liff.line.me/1656991656-LYKEA7vb`,
+                    },
+                  },
                   {
                     type: "button",
                     style: "link",
