@@ -5,9 +5,9 @@
     <flash-message></flash-message>
     <br>
     <div v-if="olts.length > 0">
-      <div class="ui input fluid">
+      <!-- <div class="ui input fluid">
         <input type="text" v-model="search" placeholder="Search">
-      </div>
+      </div> -->
       <table id="olts" class="ui celled table">
         <thead>
           <tr>

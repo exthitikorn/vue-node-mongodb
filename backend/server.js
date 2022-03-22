@@ -53,7 +53,7 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   const apiUrl =
-    "https://c59e-2001-fb1-152-267-281b-ec6a-6d7a-6e3c.ngrok.io/distance"; //API URL
+    "https://a24e-2001-fb1-152-267-c185-d8a2-2b56-6882.ngrok.io/distance"; //API URL
 
   return new Promise((resolve) => {
     // customer
@@ -72,7 +72,7 @@ function handleEvent(event) {
     //   }
     // );
     restClient.get(
-      `https://c59e-2001-fb1-152-267-281b-ec6a-6d7a-6e3c.ngrok.io/customers/`,
+      `https://a24e-2001-fb1-152-267-c185-d8a2-2b56-6882.ngrok.io/customers/`,
       (cus) => {
         // console.log(cus)
 
@@ -295,7 +295,7 @@ function handleEvent(event) {
                     height: "sm",
                     action: {
                       type: "uri",
-                      label: "Location",
+                      label: "ตำแหน่ง",
                       uri: `http://maps.google.com/maps?q=${row.lat},${row.lng}`,
                     },
                   },
