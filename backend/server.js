@@ -53,7 +53,7 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   const apiUrl =
-    "https://a24e-2001-fb1-152-267-c185-d8a2-2b56-6882.ngrok.io/distance"; //API URL
+    "https://8c32-182-52-58-27.ngrok.io/distance"; //API URL
 
   return new Promise((resolve) => {
     // customer
@@ -72,7 +72,7 @@ function handleEvent(event) {
     //   }
     // );
     restClient.get(
-      `https://a24e-2001-fb1-152-267-c185-d8a2-2b56-6882.ngrok.io/customers/`,
+      `https://8c32-182-52-58-27.ngrok.io/customers/`,
       (cus) => {
         // console.log(cus)
 
@@ -286,7 +286,7 @@ function handleEvent(event) {
                     action: {
                       type: "uri",
                       label: "หมายเลขโทรศัพท์",
-                      uri: `https://liff.line.me/1656991656-LYKEA7vb`,
+                      uri: `https://c3c8-182-52-58-27.ngrok.io/sdps/customers/${row._id}`,
                     },
                   },
                   {
