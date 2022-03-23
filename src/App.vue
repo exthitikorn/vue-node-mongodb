@@ -1,44 +1,34 @@
 <template>
   <div id="app">
-    <div class="ui inverted blue segment menu">
-      <div class="ui center aligned container">
-        <div class="ui large secondary inverted menu">
-          <router-link to="/olts" exact class="item">
-            <i class="table icon"></i> OLT
-          </router-link>
-          <router-link to="/pons" exact class="item">
-            <i class="table icon"></i> PON
-          </router-link>
-          <router-link to="/ofcccs" exact class="item">
-            <i class="table icon"></i> ofccc
-          </router-link>
-          <router-link to="/sdps" exact class="item">
-            <i class="table icon"></i> SDP
-          </router-link>
-          <router-link to="/customers" exact class="item">
-            <i class="table icon"></i> Customer
-          </router-link>
-          <router-link to="/users" exact class="item">
-            <i class="table icon"></i> Users
-          </router-link>
-        </div>
-      </div>
+    <div class="ui compact large six blue item inverted menu">
+      <router-link to="/olts" exact class="blue item">
+        <i class="table icon"></i> OLT
+      </router-link>
+      <router-link to="/pons" exact class="blue item">
+        <i class="table icon"></i> PON
+      </router-link>
+      <router-link to="/ofcccs" exact class="blue item">
+        <i class="table icon"></i> ofccc
+      </router-link>
+      <router-link to="/sdps" exact class="blue item">
+        <i class="table icon"></i> SDP
+      </router-link>
+      <router-link to="/customers" exact class="blue item">
+        <i class="table icon"></i> Customer
+      </router-link>
+      <router-link to="/users" exact class="blue item">
+        <i class="table icon"></i> Users
+      </router-link>
     </div>
+
     <div class="ui text container">
       <div class="ui one column grid">
         <div class="column">
+          <br>
           <router-view />
         </div>
       </div>
     </div>
-    <!-- footer
-    <footer>
-      <div class="ui inverted blue vertical footer segment">
-        <div class="ui center aligned container">
-          Exthitikorn(This.X) 2022.
-        </div>
-      </div>
-    </footer> -->
   </div>
 </template>
 
