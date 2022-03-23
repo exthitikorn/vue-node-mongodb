@@ -105,10 +105,6 @@ export default {
     margin: 0 0 1rem 0;
   }
 
-  tr:nth-child(odd) {
-    background: #ccc;
-  }
-
   td {
     /* Behave  like a "row" */
     border: none;
