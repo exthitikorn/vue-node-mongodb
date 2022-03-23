@@ -2,29 +2,32 @@
   <div id="app">
     <div class="ui compact large six blue item inverted menu">
       <router-link to="/olts" exact class="blue item">
-        <i class="table icon"></i> OLT
+        <i class=""></i> OLT
       </router-link>
       <router-link to="/pons" exact class="blue item">
-        <i class="table icon"></i> PON
+        <i class=""></i> PON
       </router-link>
       <router-link to="/ofcccs" exact class="blue item">
-        <i class="table icon"></i> ofccc
+        <i class=""></i> ofccc
       </router-link>
       <router-link to="/sdps" exact class="blue item">
-        <i class="table icon"></i> SDP
+        <i class=""></i> SDP
       </router-link>
       <router-link to="/customers" exact class="blue item">
-        <i class="table icon"></i> Customer
+        <i class=""></i> Customer
       </router-link>
       <router-link to="/users" exact class="blue item">
-        <i class="table icon"></i> Users
+        <i class=""></i> Users
       </router-link>
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
     </div>
 
     <div class="ui text container">
       <div class="ui one column grid">
         <div class="column">
-          <br>
+          <br />
           <router-view />
         </div>
       </div>
@@ -35,6 +38,16 @@
 <script>
 export default {
   name: "app",
+  methods: {
+    myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    },
+  },
 };
 </script>
 
@@ -61,15 +74,5 @@ div.input {
 button.ui.button {
   margin-top: 15px;
   display: block;
-}
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 50px;
-  padding-top: 2px;
-  padding-bottom: 20px;
-  margin-top: 0;
-  margin-bottom: 0;
 }
 </style>
