@@ -5,44 +5,56 @@
     <flash-message></flash-message>
     <br />
     <div v-if="olts.length > 0">
-      <div style="overflow-x: auto">
-        <table id="olts" class="ui padded table" role="table">
-          <thead role="rowgroup">
-            <tr role="row">
-              <th class="center aligned" role="columnheader">OLT Name</th>
-              <th class="center aligned" role="columnheader"><i class="map marker alternate icon"></i></th>
-              <th class="center aligned" role="columnheader"><i class="info circle icon"></i></th>
-              <th class="center aligned" role="columnheader"><i class="edit icon"></i></th>
-              <th class="center aligned" role="columnheader"><i class="trash icon"></i></th>
+      <div class="tableresponsive" style="overflow-x: auto">
+        <table id="olts" class="ui padded table">
+          <thead>
+            <tr>
+              <th class="center aligned" scope="col">OLT Name</th>
+              <th class="center aligned" scope="col">
+                <i class="map marker alternate icon"></i>
+              </th>
+              <th class="center aligned" scope="col">
+                <i class="info circle icon"></i>
+              </th>
+              <th class="center aligned" scope="col">
+                <i class="edit icon"></i>
+              </th>
+              <th class="center aligned" scope="col">
+                <i class="trash icon"></i>
+              </th>
             </tr>
           </thead>
-          <tr v-for="(olt, i) in olts" :key="i" role="row">
-            <td width="600" role="cell">{{ olt.olt_Name }}</td>
-            <td class="center aligned" role="cell">
+          <tr v-for="(olt, i) in olts" :key="i">
+            <td class="center aligned" data-title="ชื่อ" width="500px">
+              {{ olt.olt_Name }}
+            </td>
+            <td class="center aligned" data-title="ตำแหน่ง">
               <router-link
-                class="ui teal button"
+                class="ui teal button width-120px"
                 :to="{ name: 'google-map-olt', params: { id: olt._id } }"
                 >Location</router-link
               >
             </td>
-            <td class="center aligned" role="cell">
+            <td class="center aligned" data-title="รายการ PON">
               <router-link
-                class="ui green button"
+                class="ui green button width-120px"
                 :to="{ name: 'show-pon-olt', params: { id: olt._id } }"
                 >Show PON</router-link
               >
             </td>
-            <td class="center aligned" role="cell">
+            <td class="center aligned" data-title="แก้ไข">
               <router-link
-                class="ui orange button"
+                class="ui orange button width-120px"
                 :to="{ name: 'edit-olt', params: { id: olt._id } }"
                 >Edit</router-link
               >
             </td>
-            <td class="center aligned" @click.prevent="onDestroy(olt._id)" role="cell">
-              <a class="ui red button" :href="`/olts/${olt._id}`"
-                >Delete</a
-              >
+            <td
+              class="center aligned"
+              @click.prevent="onDestroy(olt._id)"
+              data-title="ลบ"
+            >
+              <a class="ui red button width-120px" :href="`/olts/${olt._id}`">Delete</a>
             </td>
           </tr>
         </table>
@@ -79,67 +91,60 @@ export default {
 </script>
 
 <style scoped>
-/*
-	Max width before this PARTICULAR table gets nasty. This query will take effect for any screen smaller than 760px and also iPads specifically.
-	*/
-@media only screen and (max-width: 760px),
-  (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* Force table to not be like tables anymore */
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.tableresponsive {
+  margin: 15px auto;
+}
+
+@media only screen and (max-width: 430px) {
+  .tableresponsive table,
+  .tableresponsive thead,
+  .tableresponsive tbody,
+  .tableresponsive th,
+  .tableresponsive td,
+  .tableresponsive tr {
     display: block;
   }
 
-  /* Hide table headers (but not display: none;, for accessibility) */
-  thead tr {
+  .tableresponsive thead tr {
     position: absolute;
     top: -9999px;
     left: -9999px;
   }
 
-  tr {
-    margin: 0 0 1rem 0;
+  .tableresponsive tr {
+    border: 1px solid #ccc;
   }
 
-  td {
-    /* Behave  like a "row" */
+  .tableresponsive td {
     border: none;
     border-bottom: 1px solid #eee;
     position: relative;
-    padding-left: 50%;
+    padding-left: 45% !important;
+    white-space: normal;
+    text-align: left;
   }
 
-  td:before {
-    /* Now like a table header */
+  .tableresponsive td:before {
     position: absolute;
-    /* Top/left values mimic padding */
-    top: 0;
+    top: 6px;
     left: 6px;
-    width: 45%;
+    width: 50%;
     padding-right: 10px;
     white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
   }
 
-  /*
-		Label the data
-    You could also use a data-* attribute and content for this. That way "bloats" the HTML, this way means you need to keep HTML and CSS in sync. Lea Verou has a clever way to handle with text-shadow.
-		*/
-  
-  td:nth-of-type(2):before {
-    content: "Location";
+  .tableresponsive td:before {
+    content: attr(data-title);
   }
-  td:nth-of-type(3):before {
-    content: "Info";
-  }
-  td:nth-of-type(4):before {
-    content: "Edit";
-  }
-  td:nth-of-type(5):before {
-    content: "Delete";
-  }
+}
+.width-120px {
+    width: 120px;
 }
 </style>
