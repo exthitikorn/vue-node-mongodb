@@ -90,7 +90,7 @@ export default {
   margin: 15px auto;
 }
 
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 770px) {
   .tableresponsive table,
   .tableresponsive thead,
   .tableresponsive tbody,
