@@ -4,7 +4,7 @@
     <flash-message></flash-message>
     <div v-if="ofcccs.length > 0">
       <div class="tableresponsive" style="overflow-x: auto">
-        <table id="ofcccs" class="ui padded table">
+        <table id="ofcccs" class="ui celled table">
           <thead>
             <tr>
               <th class="center aligned">ofccc Name</th>

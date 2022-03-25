@@ -11,7 +11,7 @@
     </div>
     <div class="ui labeled input fluid">
       <div class="ui label"><i class=""></i>Tel.</div>
-      <input type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="Enter Telephone number..." v-model="cus.tel" />
+      <input type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="10" placeholder="Enter Telephone number..." v-model="cus.tel" />
     </div>
     <div class="ui labeled input fluid">
       <div class="ui label"><i class=""></i>SDP name</div>

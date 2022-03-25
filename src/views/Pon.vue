@@ -5,8 +5,8 @@
     <flash-message></flash-message>
     <br />
     <div v-if="pons.length > 0">
-      <div  class="tableresponsive" style="overflow-x: auto">
-        <table id="pons" class="ui padded table">
+      <div class="tableresponsive" style="overflow-x: auto">
+        <table id="pons" class="ui celled table">
           <thead>
             <tr>
               <th class="center aligned">PON Name</th>

@@ -2,6 +2,34 @@
   <div class="row">
     <form action="#" @submit.prevent="onSubmit">
       <div class="column">
+        <div>
+          <p class="groove">
+            <GmapMap
+              :center="center"
+              :zoom="zoom"
+              map-style-id="roadmap"
+              :options="mapOptions"
+              style="width: 100%; height: 400px"
+              ref="mapRef"
+              @click="handleMapClick"
+            >
+              <GmapMarker
+                :position="marker.position"
+                :clickable="true"
+                :draggable="true"
+                @drag="handleMarkerDrag"
+                @click="panToMarker"
+              />
+            </GmapMap>
+          </p>
+          <div class="container6">
+            <a v-on:click="geolocate()" class="ui orange button"
+              >Current Location</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="column">
         <p v-if="errorsPresent" class="error">Please fill out both fields!</p>
         <div class="ui labeled input fluid">
           <div class="ui label"><i class=""></i>ofccc name</div>
@@ -60,34 +88,6 @@
             <a onclick="history.back()" class="negative ui button">Back</a>
           </td>
         </table>
-      </div>
-      <div class="column">
-        <div>
-          <p class="groove">
-            <GmapMap
-              :center="center"
-              :zoom="zoom"
-              map-style-id="roadmap"
-              :options="mapOptions"
-              style="width: 100%; height: 400px"
-              ref="mapRef"
-              @click="handleMapClick"
-            >
-              <GmapMarker
-                :position="marker.position"
-                :clickable="true"
-                :draggable="true"
-                @drag="handleMarkerDrag"
-                @click="panToMarker"
-              />
-            </GmapMap>
-          </p>
-          <div class="container6">
-            <a v-on:click="geolocate()" class="ui orange button"
-              >Current Location</a
-            >
-          </div>
-        </div>
       </div>
     </form>
   </div>
@@ -217,6 +217,11 @@ export default {
   content: "";
   display: table;
   clear: both;
+}
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
 }
 div.container6 {
   height: 5em;

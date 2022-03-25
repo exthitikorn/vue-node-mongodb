@@ -6,7 +6,7 @@
     <br />
     <div v-if="olts.length > 0">
       <div class="tableresponsive" style="overflow-x: auto">
-        <table id="olts" class="ui padded table">
+        <table id="olts" class="ui celled table">
           <thead>
             <tr>
               <th class="center aligned" scope="col">OLT Name</th>

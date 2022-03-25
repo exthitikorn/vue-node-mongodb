@@ -5,7 +5,7 @@
     <br />
     <div v-if="pons.length > 0">
       <div class="tableresponsive" style="overflow-x: auto">
-        <table id="pons" class="ui padded table">
+        <table id="pons" class="ui celled table">
         <thead>
           <tr>
             <th class="center aligned"><i class=""></i>PON Name</th>

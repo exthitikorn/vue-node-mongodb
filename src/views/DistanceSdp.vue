@@ -2,47 +2,47 @@
   <div>
     <h1>SDP around me</h1>
     <div v-if="dataLoc.length > 0">
-    <p class="groove">
-      <GmapMap
-        :center="currentLocation"
-        :zoom="zoom"
-        :options="mapOptions"
-        map-style-id="roadmap"
-        style="width: 100%; height: 550px"
-      >
-      <GmapMarker
-        v-for="(markers, i) in setMarker()" :key="i"
-        :position="markers.position"
-      />
-      </GmapMap>
-    </p>
-      <table class="ui celled compact table">
-        <thead>
-          <tr>
-            <th><i class=""></i>SDP name</th>
-            <!-- <th><i class=""></i>lat</th>
-            <th><i class=""></i>lng</th> -->
-            <th><i class=""></i>Distance</th>
-            <th class="center aligned">
-              <i class="map marker alternate icon"></i>
-            </th>
+      <p class="groove">
+        <GmapMap
+          :center="currentLocation"
+          :zoom="zoom"
+          :options="mapOptions"
+          map-style-id="roadmap"
+          style="width: 100%; height: 550px"
+        >
+          <GmapMarker
+            v-for="(markers, i) in setMarker()"
+            :key="i"
+            :position="markers.position"
+          />
+        </GmapMap>
+      </p>
+      <div class="tableresponsive" style="overflow-x: auto">
+        <table class="ui celled compact table">
+          <thead>
+            <tr>
+              <th class="center aligned">SDP name</th>
+              <th class="center aligned">Distance</th>
+              <th class="center aligned">
+                <i class="map marker alternate icon"></i>
+              </th>
+            </tr>
+          </thead>
+          <tr v-for="(dataLoc, i) in sortedDataLoc(dataLoc)" :key="i">
+            <td class="center aligned" data-title="ชื่อ">{{ dataLoc.name }}</td>
+            <td class="center aligned" data-title="ระยะห่าง">{{ dataLoc.dist }} เมตร</td>
+            <td class="center aligned" data-title="ตำแหน่ง">
+              <a
+                v-on:click="changeCenter(dataLoc.lat, dataLoc.lng)"
+                class="ui teal button"
+                >Location</a
+              >
+            </td>
           </tr>
-        </thead>
-        <tr v-for="(dataLoc, i) in sortedDataLoc(dataLoc)" :key="i">
-          <td>{{ dataLoc.name }}</td>
-          <!-- <td>{{ dataLoc.lat }}</td>
-          <td>{{ dataLoc.lng }}</td> -->
-          <td>{{ dataLoc.dist }} Meter</td>
-          <td width="120" class="center aligned">
-            <a v-on:click="changeCenter(dataLoc.lat, dataLoc.lng)" class="ui teal button">Location</a>
-            <!-- <router-link class="ui teal button" :to="{ name: 'google-map-sdp', params: { id: dataLoc._id } }"
-              >Location</router-link
-            > -->
-          </td>
-        </tr>
-      </table>
+        </table>
+      </div>
     </div>
-    <div v-else>Don't any have a SDP in distance of 500 meters</div>
+    <div v-else>Don't any have a SDP in distance of 300 meters</div>
     <div class="container6">
       <a onclick="history.back()" class="negative ui button">Back</a>
     </div>
@@ -69,9 +69,9 @@ export default {
   methods: {
     //Set center
     changeCenter(lat, lng) {
-      this.currentLocation.lat = lat
-      this.currentLocation.lng = lng
-      this.zoom = 19
+      this.currentLocation.lat = lat;
+      this.currentLocation.lng = lng;
+      this.zoom = 19;
 
       this.$refs.mapRef.panTo(this.currentLocation);
     },
@@ -83,8 +83,8 @@ export default {
         markers.push({
           position: {
             lat: this.dataDist[i].loc[1],
-            lng: this.dataDist[i].loc[0]
-          }
+            lng: this.dataDist[i].loc[0],
+          },
         });
       }
       return markers;
@@ -106,8 +106,8 @@ export default {
           lng: position.coords.longitude,
         };
       });
-      this.center.lat = this.currentLocation.lat
-      this.center.lng = this.currentLocation.lng
+      this.center.lat = this.currentLocation.lat;
+      this.center.lng = this.currentLocation.lng;
     },
 
     //Calculate distance
@@ -140,7 +140,7 @@ export default {
             dist = (dist * 180) / Math.PI;
             dist = dist * 60 * 1.1515;
             dist = dist * 1609.344;
-            if (dist < 500) {
+            if (dist < 300) {
               this.dataLoc.push({
                 _id: this.dataDist[i]._id,
                 name: this.dataDist[i].sdp_Name,
@@ -162,12 +162,67 @@ export default {
       this.$route.params.lat
     );
     this.distance();
-    
   },
 };
 </script>
 
 <style scoped>
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.tableresponsive {
+  margin: 15px auto;
+}
+
+@media only screen and (max-width: 770px) {
+  .tableresponsive table,
+  .tableresponsive thead,
+  .tableresponsive tbody,
+  .tableresponsive th,
+  .tableresponsive td,
+  .tableresponsive tr {
+    display: block;
+  }
+
+  .tableresponsive thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .tableresponsive tr {
+    border: 1px solid #ccc;
+  }
+
+  .tableresponsive td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 45% !important;
+    white-space: normal;
+    text-align: left;
+  }
+
+  .tableresponsive td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 50%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .tableresponsive td:before {
+    content: attr(data-title);
+  }
+}
+.width-120px {
+  width: 120px;
+}
 div.container6 {
   height: 5em;
   display: flex;
