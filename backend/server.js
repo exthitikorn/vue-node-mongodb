@@ -53,7 +53,7 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   const apiUrl =
-    "https://a8c9-182-52-58-27.ngrok.io/distance"; //Backend API URL
+    "https://2083-2001-fb1-151-55ed-5d8b-82d5-99d3-f705.ngrok.io/distance"; //Backend API URL
 
   return new Promise((resolve) => {
     // customer
@@ -72,7 +72,7 @@ function handleEvent(event) {
     //   }
     // );
     restClient.get(
-      `https://a8c9-182-52-58-27.ngrok.io/customers/`,
+      `https://2083-2001-fb1-151-55ed-5d8b-82d5-99d3-f705.ngrok.io/customers/`,
       (cus) => {
         // console.log(cus)
 
@@ -286,7 +286,7 @@ function handleEvent(event) {
                     action: {
                       type: "uri",
                       label: "หมายเลขโทรศัพท์",
-                      uri: `https://4d3f-182-52-58-27.ngrok.io/sdps/customers/${row._id}`,
+                      uri: `https://ab29-2001-fb1-151-55ed-5d8b-82d5-99d3-f705.ngrok.io/sdps/customers/${row._id}`,
                     },
                   },
                   {
