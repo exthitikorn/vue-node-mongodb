@@ -12,8 +12,12 @@
             </tr>
           </thead>
           <tr v-for="(customers, i) in customers" :key="i">
-            <td class="center aligned" data-title="ชื่อ">{{ customers.fullname }}</td>
-            <td class="center aligned" data-title="เบอร์โทร">{{ customers.tel }}</td>
+            <td class="center aligned" data-title="ชื่อ">
+              {{ customers.fullname }}
+            </td>
+            <td class="center aligned" data-title="เบอร์โทร">
+              {{ customers.tel }}
+            </td>
           </tr>
         </table>
       </div>

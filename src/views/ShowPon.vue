@@ -17,10 +17,18 @@
             </tr>
           </thead>
           <tr v-for="(ofccc, i) in ofcccs" :key="i">
-            <td class="center aligned" data-title="ชื่อ">{{ ofccc.ofccc_Name }}</td>
-            <td class="center aligned" data-title="ประเภท">{{ ofccc.ofccc_Type }}</td>
-            <td class="center aligned" data-title="ละติจูด">{{ ofccc.ofccc_Lat }}</td>
-            <td class="center aligned" data-title="ลองจิจูด">{{ ofccc.ofccc_Lng }}</td>
+            <td class="center aligned" data-title="ชื่อ">
+              {{ ofccc.ofccc_Name }}
+            </td>
+            <td class="center aligned" data-title="ประเภท">
+              {{ ofccc.ofccc_Type }}
+            </td>
+            <td class="center aligned" data-title="ละติจูด">
+              {{ ofccc.ofccc_Lat }}
+            </td>
+            <td class="center aligned" data-title="ลองจิจูด">
+              {{ ofccc.ofccc_Lng }}
+            </td>
             <td class="center aligned" data-title="ตำแหน่ง">
               <router-link
                 class="ui teal button width-120px"

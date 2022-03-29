@@ -16,9 +16,15 @@
           </thead>
           <tr v-for="(sdp, i) in sdps" :key="i">
             <td class="center aligned" data-title="ชื่อ">{{ sdp.sdp_Name }}</td>
-            <td class="center aligned" data-title="ประเภท">{{ sdp.sdp_Type }}</td>
-            <td class="center aligned" data-title="ละติจูด">{{ sdp.loc[1] }}</td>
-            <td class="center aligned" data-title="ลองจิจูด">{{ sdp.loc[0] }}</td>
+            <td class="center aligned" data-title="ประเภท">
+              {{ sdp.sdp_Type }}
+            </td>
+            <td class="center aligned" data-title="ละติจูด">
+              {{ sdp.loc[1] }}
+            </td>
+            <td class="center aligned" data-title="ลองจิจูด">
+              {{ sdp.loc[0] }}
+            </td>
             <td class="center aligned" data-title="ตำแหน่ง">
               <router-link
                 class="ui teal button"

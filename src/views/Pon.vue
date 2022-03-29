@@ -23,10 +23,14 @@
           <tr v-for="(pon, i) in pons" :key="i">
             <td class="center aligned" data-title="ชื่อ">{{ pon.pon_Name }}</td>
             <td class="center aligned" data-title="rack">{{ pon.pon_Rack }}</td>
-            <td class="center aligned" data-title="shelf">{{ pon.pon_Shelf }}</td>
+            <td class="center aligned" data-title="shelf">
+              {{ pon.pon_Shelf }}
+            </td>
             <td class="center aligned" data-title="slot">{{ pon.pon_Slot }}</td>
             <td class="center aligned" data-title="port">{{ pon.pon_Port }}</td>
-            <td class="center aligned" data-title="olt">{{ pon.olt.olt_Name }}</td>
+            <td class="center aligned" data-title="olt">
+              {{ pon.olt.olt_Name }}
+            </td>
             <td class="center aligned" data-title="รายการ ofccc">
               <router-link
                 class="ui green button width-120px"
@@ -42,10 +46,13 @@
               >
             </td>
             <td
-              class="center aligned" data-title="ลบ"
+              class="center aligned"
+              data-title="ลบ"
               @click.prevent="onDestroy(pon._id)"
             >
-              <a class="ui red button width-120px" :href="`/pons/${pon._id}`">Delete</a>
+              <a class="ui red button width-120px" :href="`/pons/${pon._id}`"
+                >Delete</a
+              >
             </td>
           </tr>
         </table>

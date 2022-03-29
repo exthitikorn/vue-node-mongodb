@@ -54,7 +54,9 @@
               @click.prevent="onDestroy(olt._id)"
               data-title="ลบ"
             >
-              <a class="ui red button width-120px" :href="`/olts/${olt._id}`">Delete</a>
+              <a class="ui red button width-120px" :href="`/olts/${olt._id}`"
+                >Delete</a
+              >
             </td>
           </tr>
         </table>
@@ -145,6 +147,6 @@ export default {
   }
 }
 .width-120px {
-    width: 120px;
+  width: 120px;
 }
 </style>

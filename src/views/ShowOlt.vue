@@ -6,29 +6,31 @@
     <div v-if="pons.length > 0">
       <div class="tableresponsive" style="overflow-x: auto">
         <table id="pons" class="ui celled table">
-        <thead>
-          <tr>
-            <th class="center aligned"><i class=""></i>PON Name</th>
-            <th class="center aligned"><i class=""></i>Rack</th>
-            <th class="center aligned"><i class=""></i>Shelf</th>
-            <th class="center aligned"><i class=""></i>Slot</th>
-            <th class="center aligned"><i class=""></i>Port</th>
+          <thead>
+            <tr>
+              <th class="center aligned"><i class=""></i>PON Name</th>
+              <th class="center aligned"><i class=""></i>Rack</th>
+              <th class="center aligned"><i class=""></i>Shelf</th>
+              <th class="center aligned"><i class=""></i>Slot</th>
+              <th class="center aligned"><i class=""></i>Port</th>
+            </tr>
+          </thead>
+          <tr v-for="(pon, i) in pons" :key="i">
+            <td class="center aligned" data-title="ชื่อ">{{ pon.pon_Name }}</td>
+            <td class="center aligned" data-title="rack">{{ pon.pon_Rack }}</td>
+            <td class="center aligned" data-title="shelf">
+              {{ pon.pon_Shelf }}
+            </td>
+            <td class="center aligned" data-title="slot">{{ pon.pon_Slot }}</td>
+            <td class="center aligned" data-title="port">{{ pon.pon_Port }}</td>
           </tr>
-        </thead>
-        <tr v-for="(pon, i) in pons" :key="i">
-          <td class="center aligned" data-title="ชื่อ">{{ pon.pon_Name }}</td>
-          <td class="center aligned" data-title="rack">{{ pon.pon_Rack }}</td>
-          <td class="center aligned" data-title="shelf">{{ pon.pon_Shelf }}</td>
-          <td class="center aligned" data-title="slot">{{ pon.pon_Slot }}</td>
-          <td class="center aligned" data-title="port">{{ pon.pon_Port }}</td>
-        </tr>
-      </table>
+        </table>
       </div>
     </div>
     <div v-else>You don't have any PON!.</div>
     <div class="container6">
-        <a onclick="history.back()" class="negative ui button">Back</a>
-      </div>
+      <a onclick="history.back()" class="negative ui button">Back</a>
+    </div>
   </div>
 </template>
 

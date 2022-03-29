@@ -26,9 +26,15 @@
             </tr>
           </thead>
           <tr v-for="(sdp, i) in sdps" :key="i">
-            <td class="center aligned" width="250px" data-title="ชื่อ">{{ sdp.sdp_Name }}</td>
-            <td class="center aligned" data-title="ประเภท">{{ sdp.sdp_Type }}</td>
-            <td class="center aligned" width="200px" data-title="ofccc">{{ sdp.ofccc.ofccc_Name }}</td>
+            <td class="center aligned" width="250px" data-title="ชื่อ">
+              {{ sdp.sdp_Name }}
+            </td>
+            <td class="center aligned" data-title="ประเภท">
+              {{ sdp.sdp_Type }}
+            </td>
+            <td class="center aligned" width="200px" data-title="ofccc">
+              {{ sdp.ofccc.ofccc_Name }}
+            </td>
             <td class="center aligned" data-title="ตำแหน่ง">
               <router-link
                 class="ui teal button width-120px"
@@ -50,10 +56,14 @@
                 >Edit</router-link
               >
             </td>
-            <td class="center aligned" data-title="ลบ"
+            <td
+              class="center aligned"
+              data-title="ลบ"
               @click.prevent="onDestroy(sdp._id)"
             >
-              <a class="ui red button width-120px" :href="`/sdps/${sdp._id}`">Delete</a>
+              <a class="ui red button width-120px" :href="`/sdps/${sdp._id}`"
+                >Delete</a
+              >
             </td>
           </tr>
         </table>

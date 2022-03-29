@@ -21,9 +21,15 @@
             </tr>
           </thead>
           <tr v-for="(ofccc, i) in ofcccs" :key="i">
-            <td class="center aligned" data-title="ชื่อ">{{ ofccc.ofccc_Name }}</td>
-            <td class="center aligned" data-title="ประเภท">{{ ofccc.ofccc_Type }}</td>
-            <td class="center aligned" data-title="PON">{{ ofccc.pon.pon_Name }}</td>
+            <td class="center aligned" data-title="ชื่อ">
+              {{ ofccc.ofccc_Name }}
+            </td>
+            <td class="center aligned" data-title="ประเภท">
+              {{ ofccc.ofccc_Type }}
+            </td>
+            <td class="center aligned" data-title="PON">
+              {{ ofccc.pon.pon_Name }}
+            </td>
             <td class="center aligned" data-title="ตำแหน่ง">
               <router-link
                 class="ui teal button width-120px"
@@ -45,7 +51,11 @@
                 >Edit</router-link
               >
             </td>
-            <td class="center aligned" data-title="ลบ" @click.prevent="onDestroy(ofccc._id)">
+            <td
+              class="center aligned"
+              data-title="ลบ"
+              @click.prevent="onDestroy(ofccc._id)"
+            >
               <a
                 class="ui red button width-120px"
                 :href="`/ofcccs/${ofccc._id}`"
