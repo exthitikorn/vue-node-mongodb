@@ -52,8 +52,11 @@ function handleEvent(event) {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
+
+  console.log(event.source.userId) //message data
+
   const apiUrl =
-    "https://2083-2001-fb1-151-55ed-5d8b-82d5-99d3-f705.ngrok.io/distance"; //Backend API URL
+    "https://150b-2001-fb1-151-55ed-98e7-f52b-876f-31b.ngrok.io/distance"; //Backend API URL
 
   return new Promise((resolve) => {
     // customer
@@ -72,7 +75,7 @@ function handleEvent(event) {
     //   }
     // );
     restClient.get(
-      `https://2083-2001-fb1-151-55ed-5d8b-82d5-99d3-f705.ngrok.io/customers/`,
+      `https://150b-2001-fb1-151-55ed-98e7-f52b-876f-31b.ngrok.io/customers/`,
       (cus) => {
         // console.log(cus)
 
@@ -286,7 +289,7 @@ function handleEvent(event) {
                     action: {
                       type: "uri",
                       label: "หมายเลขโทรศัพท์",
-                      uri: `https://ab29-2001-fb1-151-55ed-5d8b-82d5-99d3-f705.ngrok.io/sdps/customers/${row._id}`,
+                      uri: `https://3647-2001-fb1-151-55ed-98e7-f52b-876f-31b.ngrok.io/sdps/customers/${row._id}`,
                     },
                   },
                   {
