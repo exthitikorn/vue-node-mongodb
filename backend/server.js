@@ -52,284 +52,274 @@ function handleEvent(event) {
     // ignore non-text-message event
     return Promise.resolve(null);
   }
-
-  console.log(event.source.userId) //message data
-
   const apiUrl =
-    "https://150b-2001-fb1-151-55ed-98e7-f52b-876f-31b.ngrok.io/distance"; //Backend API URL
-
-  return new Promise((resolve) => {
-    // customer
-    // restClient.get(
-    //   `https://9234-182-52-58-27.ngrok.io/customers/`,
-    //   (cus) => {
-    //     const customerData = [];
-    //     for (let i = 0; i < cus.length; i++) {
-    //       customerData.push({
-    //         fullname: cus[i].fullname,
-    //         tel: cus[i].tel,
-    //         sdp: cus[i].sdp,
-    //       });
-    //     }
-    //     // console.log(customerData);
-    //   }
-    // );
-    restClient.get(
-      `https://150b-2001-fb1-151-55ed-98e7-f52b-876f-31b.ngrok.io/customers/`,
-      (cus) => {
-        // console.log(cus)
-
+    "https://01e7-2001-fb1-151-55ed-78c3-30d0-59e8-12d0.ngrok.io/distance"; //Backend API URL
+  const user = mongoose.model("user");
+  // console.log(event.source.userId); //message data
+  user.find({ Line_id: event.source.userId }, (err, users) => {
+    if (err) {
+      console.log(err);
+    } else if (users.length !== 0) {
+      // console.log("users");
+      return new Promise((resolve) => {
         restClient.get(
-          `${apiUrl}/${event.message.longitude}/${event.message.latitude}`,
-          (data) => {
-            const locData = [];
-            const cusData = [];
+          `https://01e7-2001-fb1-151-55ed-78c3-30d0-59e8-12d0.ngrok.io/customers/`,
+          (cus) => {
+            // console.log(cus)
 
-            for (let i = 0; i < data.length; i++) {
-              // Difine variable
-              var lat1 = event.message.latitude;
-              var lng1 = event.message.longitude;
-              var lat2 = data[i].loc[1];
-              var lng2 = data[i].loc[0];
+            restClient.get(
+              `${apiUrl}/${event.message.longitude}/${event.message.latitude}`,
+              (data) => {
+                const locData = [];
+                const cusData = [];
 
-              // Calaulate distance
-              var radlat1 = (Math.PI * lat1) / 180;
-              var radlat2 = (Math.PI * lat2) / 180;
-              var theta = lng1 - lng2;
-              var radtheta = (Math.PI * theta) / 180;
-              var dist =
-                Math.sin(radlat1) * Math.sin(radlat2) +
-                Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-              if (dist > 1) {
-                dist = 1;
-              } else {
-                dist = Math.acos(dist);
-                dist = (dist * 180) / Math.PI;
-                dist = dist * 60 * 1.1515;
-                dist = dist * 1609.344;
-              }
-              locData.push({
-                _id: data[i]._id,
-                name: data[i].sdp_Name,
-                type: data[i].sdp_Type,
-                lat: data[i].loc[1],
-                lng: data[i].loc[0],
-                ofccc: data[i].ofccc.ofccc_Name,
-                pon: data[i].ofccc.pon.pon_Name,
-                olt: data[i].ofccc.pon.olt.olt_Name,
-                dist: dist.toFixed(0),
-              });
+                for (let i = 0; i < data.length; i++) {
+                  // Difine variable
+                  var lat1 = event.message.latitude;
+                  var lng1 = event.message.longitude;
+                  var lat2 = data[i].loc[1];
+                  var lng2 = data[i].loc[0];
 
-              cusData.push({
-                _id: cus[i]._id,
-                fullname: cus[i].fullname,
-                tel: cus[i].tel,
-                sdp: cus[i].sdp,
-              });
-            }
+                  // Calaulate distance
+                  var radlat1 = (Math.PI * lat1) / 180;
+                  var radlat2 = (Math.PI * lat2) / 180;
+                  var theta = lng1 - lng2;
+                  var radtheta = (Math.PI * theta) / 180;
+                  var dist =
+                    Math.sin(radlat1) * Math.sin(radlat2) +
+                    Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+                  if (dist > 1) {
+                    dist = 1;
+                  } else {
+                    dist = Math.acos(dist);
+                    dist = (dist * 180) / Math.PI;
+                    dist = dist * 60 * 1.1515;
+                    dist = dist * 1609.344;
+                  }
+                  locData.push({
+                    _id: data[i]._id,
+                    name: data[i].sdp_Name,
+                    type: data[i].sdp_Type,
+                    lat: data[i].loc[1],
+                    lng: data[i].loc[0],
+                    ofccc: data[i].ofccc.ofccc_Name,
+                    pon: data[i].ofccc.pon.pon_Name,
+                    olt: data[i].ofccc.pon.olt.olt_Name,
+                    dist: dist.toFixed(0),
+                  });
 
-            // console.log(cusData[1].sdp._id);
+                  cusData.push({
+                    _id: cus[i]._id,
+                    fullname: cus[i].fullname,
+                    tel: cus[i].tel,
+                    sdp: cus[i].sdp,
+                  });
+                }
 
-            //Sort data
-            locData.sort(function(a, b) {
-              return a.dist - b.dist;
-            });
+                // console.log(cusData[1].sdp._id);
 
-            // console.log(locData);
+                //Sort data
+                locData.sort(function(a, b) {
+                  return a.dist - b.dist;
+                });
 
-            // const telData = cusData.map((row) => ({
-            //   type: "box",
-            //   layout: "baseline",
-            //   spacing: "sm",
-            //   contents: [
-            //     {
-            //       type: "text",
-            //       text: "Tel. ",
-            //       color: "#aaaaaa",
-            //       size: "sm",
-            //       flex: 1,
-            //     },
-            //     {
-            //       type: "text",
-            //       text: row.tel,
-            //       wrap: true,
-            //       color: "#666666",
-            //       size: "sm",
-            //       flex: 5,
-            //     },
-            //   ],
-            // }));
-            // console.log(telData);
-            // create a data
-            const contentsData = locData.map((row) => ({
-              type: "bubble",
-              header: {
-                type: "box",
-                layout: "vertical",
-                contents: [
-                  {
-                    type: "text",
-                    text: `${row.name} ระยะห่าง ${row.dist} เมตร`,
-                    size: "lg",
-                    weight: "bold",
-                  },
-                ],
-              },
-              body: {
-                type: "box",
-                layout: "vertical",
-                contents: [
-                  {
-                    type: "text",
-                    text: "ข้อมูล SDP",
-                    size: "lg",
-                    align: "center",
-                  },
-                  {
+                // console.log(locData);
+
+                // const telData = cusData.map((row) => ({
+                //   type: "box",
+                //   layout: "baseline",
+                //   spacing: "sm",
+                //   contents: [
+                //     {
+                //       type: "text",
+                //       text: "Tel. ",
+                //       color: "#aaaaaa",
+                //       size: "sm",
+                //       flex: 1,
+                //     },
+                //     {
+                //       type: "text",
+                //       text: row.tel,
+                //       wrap: true,
+                //       color: "#666666",
+                //       size: "sm",
+                //       flex: 5,
+                //     },
+                //   ],
+                // }));
+                // console.log(telData);
+                // create a data
+                const contentsData = locData.map((row) => ({
+                  type: "bubble",
+                  header: {
                     type: "box",
                     layout: "vertical",
-                    margin: "lg",
+                    contents: [
+                      {
+                        type: "text",
+                        text: `${row.name} ระยะห่าง ${row.dist} เมตร`,
+                        size: "lg",
+                        weight: "bold",
+                      },
+                    ],
+                  },
+                  body: {
+                    type: "box",
+                    layout: "vertical",
+                    contents: [
+                      {
+                        type: "text",
+                        text: "ข้อมูล SDP",
+                        size: "lg",
+                        align: "center",
+                      },
+                      {
+                        type: "box",
+                        layout: "vertical",
+                        margin: "lg",
+                        spacing: "sm",
+                        contents: [
+                          {
+                            type: "box",
+                            layout: "baseline",
+                            spacing: "sm",
+                            contents: [
+                              {
+                                type: "text",
+                                text: "OLT: ",
+                                color: "#aaaaaa",
+                                size: "sm",
+                                flex: 1,
+                              },
+                              {
+                                type: "text",
+                                text: row.olt,
+                                wrap: true,
+                                color: "#666666",
+                                size: "sm",
+                                flex: 5,
+                              },
+                            ],
+                          },
+                          {
+                            type: "box",
+                            layout: "baseline",
+                            spacing: "sm",
+                            contents: [
+                              {
+                                type: "text",
+                                text: "PON: ",
+                                color: "#aaaaaa",
+                                size: "sm",
+                                flex: 1,
+                              },
+                              {
+                                type: "text",
+                                text: row.pon,
+                                wrap: true,
+                                color: "#666666",
+                                size: "sm",
+                                flex: 5,
+                              },
+                            ],
+                          },
+                          {
+                            type: "box",
+                            layout: "baseline",
+                            spacing: "sm",
+                            contents: [
+                              {
+                                type: "text",
+                                text: "ofccc: ",
+                                color: "#aaaaaa",
+                                size: "sm",
+                                flex: 1,
+                              },
+                              {
+                                type: "text",
+                                text: row.ofccc,
+                                wrap: true,
+                                color: "#666666",
+                                size: "sm",
+                                flex: 5,
+                              },
+                            ],
+                          },
+                          {
+                            type: "separator",
+                          },
+                          // {
+                          //   type: "text",
+                          //   text: "ข้อมูลหมายเลข",
+                          //   size: "lg",
+                          //   align: "center",
+                          // },
+                          // {
+                          //   type: "box",
+                          //   layout: "vertical",
+                          //   margin: "lg",
+                          //   spacing: "sm",
+                          //   contents: telData,
+                          // },
+                        ],
+                      },
+                    ],
+                  },
+                  footer: {
+                    type: "box",
+                    layout: "vertical",
                     spacing: "sm",
                     contents: [
                       {
-                        type: "box",
-                        layout: "baseline",
-                        spacing: "sm",
-                        contents: [
-                          {
-                            type: "text",
-                            text: "OLT: ",
-                            color: "#aaaaaa",
-                            size: "sm",
-                            flex: 1,
-                          },
-                          {
-                            type: "text",
-                            text: row.olt,
-                            wrap: true,
-                            color: "#666666",
-                            size: "sm",
-                            flex: 5,
-                          },
-                        ],
+                        type: "button",
+                        style: "link",
+                        height: "sm",
+                        action: {
+                          type: "uri",
+                          label: "หมายเลขโทรศัพท์",
+                          uri: `https://368d-2001-fb1-151-55ed-78c3-30d0-59e8-12d0.ngrok.io/sdps/customers/${row._id}`,
+                        },
                       },
                       {
-                        type: "box",
-                        layout: "baseline",
-                        spacing: "sm",
-                        contents: [
-                          {
-                            type: "text",
-                            text: "PON: ",
-                            color: "#aaaaaa",
-                            size: "sm",
-                            flex: 1,
-                          },
-                          {
-                            type: "text",
-                            text: row.pon,
-                            wrap: true,
-                            color: "#666666",
-                            size: "sm",
-                            flex: 5,
-                          },
-                        ],
+                        type: "button",
+                        style: "link",
+                        height: "sm",
+                        action: {
+                          type: "uri",
+                          label: "ตำแหน่ง",
+                          uri: `http://maps.google.com/maps?q=${row.lat},${row.lng}`,
+                        },
                       },
-                      {
-                        type: "box",
-                        layout: "baseline",
-                        spacing: "sm",
-                        contents: [
-                          {
-                            type: "text",
-                            text: "ofccc: ",
-                            color: "#aaaaaa",
-                            size: "sm",
-                            flex: 1,
-                          },
-                          {
-                            type: "text",
-                            text: row.ofccc,
-                            wrap: true,
-                            color: "#666666",
-                            size: "sm",
-                            flex: 5,
-                          },
-                        ],
-                      },
-                      {
-                        type: "separator",
-                      },
-                      // {
-                      //   type: "text",
-                      //   text: "ข้อมูลหมายเลข",
-                      //   size: "lg",
-                      //   align: "center",
-                      // },
-                      // {
-                      //   type: "box",
-                      //   layout: "vertical",
-                      //   margin: "lg",
-                      //   spacing: "sm",
-                      //   contents: telData,
-                      // },
                     ],
+                    flex: 0,
                   },
-                ],
-              },
-              footer: {
-                type: "box",
-                layout: "vertical",
-                spacing: "sm",
-                contents: [
-                  {
-                    type: "button",
-                    style: "link",
-                    height: "sm",
-                    action: {
-                      type: "uri",
-                      label: "หมายเลขโทรศัพท์",
-                      uri: `https://3647-2001-fb1-151-55ed-98e7-f52b-876f-31b.ngrok.io/sdps/customers/${row._id}`,
+                  styles: {
+                    header: {
+                      backgroundColor: "#A7E2FF",
+                    },
+                    footer: {
+                      backgroundColor: "#FFFFFF",
                     },
                   },
-                  {
-                    type: "button",
-                    style: "link",
-                    height: "sm",
-                    action: {
-                      type: "uri",
-                      label: "ตำแหน่ง",
-                      uri: `http://maps.google.com/maps?q=${row.lat},${row.lng}`,
-                    },
-                  },
-                ],
-                flex: 0,
-              },
-              styles: {
-                header: {
-                  backgroundColor: "#A7E2FF",
-                },
-                footer: {
-                  backgroundColor: "#FFFFFF",
-                },
-              },
-            }));
-            // console.log(pinData)
+                }));
+                // console.log(pinData)
 
-            const msg = {
-              type: "flex",
-              altText: "Flex Message",
-              contents: {
-                type: "carousel",
-                contents: contentsData,
-              },
-            };
-            // console.log(msg)
-            resolve(client.replyMessage(event.replyToken, msg));
+                const msg = {
+                  type: "flex",
+                  altText: "Flex Message",
+                  contents: {
+                    type: "carousel",
+                    contents: contentsData,
+                  },
+                };
+                // console.log(msg)
+                resolve(client.replyMessage(event.replyToken, msg));
+              }
+            );
           }
         );
-      }
-    );
+      });
+    }
   });
 }
 
