@@ -18,7 +18,8 @@
     "vue-select": "^3.16.0",
     "vue-simple-alert": "^1.1.1",
     "vue-simple-search-dropdown": "^1.0.1",
-    "vue2-google-maps": "^0.10.7"
+    "vue2-google-maps": "^0.10.7",
+    "vuetable-2": "^2.0.0-beta.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

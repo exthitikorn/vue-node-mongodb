@@ -9,7 +9,7 @@ Vue.use(VueFlashMessage, {
   },
 });
 const vm = new Vue();
-const baseURL = "https://028a-2001-fb1-151-55ed-dda5-3c50-f8c-f4cf.ngrok.io/";        //http://localhost:3000/  ***** URL API *****
+const baseURL = "https://fca1-182-52-58-27.ngrok.io/";        //http://localhost:3000/  ***** URL API *****
 // const oltURL = "https://a8c9-182-52-58-27.ngrok.io/olts/";
 // const ponURL = "https://a8c9-182-52-58-27.ngrok.io/pons/"
 // const ofcccURL = "https://a8c9-182-52-58-27.ngrok.io/ofcccs/";

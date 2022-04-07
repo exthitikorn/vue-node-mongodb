@@ -53,7 +53,7 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   const apiUrl =
-    "https://028a-2001-fb1-151-55ed-dda5-3c50-f8c-f4cf.ngrok.io/distance"; //Backend API URL
+    "https://fca1-182-52-58-27.ngrok.io/distance"; //Backend API URL
   const user = mongoose.model("user");
   // console.log(event.source.userId); //message data
   user.find({ Line_id: event.source.userId }, (err, users) => {
@@ -63,7 +63,7 @@ function handleEvent(event) {
       // console.log("users");
       return new Promise((resolve) => {
         restClient.get(
-          `https://028a-2001-fb1-151-55ed-dda5-3c50-f8c-f4cf.ngrok.io/customers/`,
+          `https://fca1-182-52-58-27.ngrok.io/customers/`,
           (cus) => {
             // console.log(cus)
 
@@ -116,38 +116,11 @@ function handleEvent(event) {
                   });
                 }
 
-                // console.log(cusData[1].sdp._id);
-
                 //Sort data
                 locData.sort(function(a, b) {
                   return a.dist - b.dist;
                 });
 
-                // console.log(locData);
-
-                // const telData = cusData.map((row) => ({
-                //   type: "box",
-                //   layout: "baseline",
-                //   spacing: "sm",
-                //   contents: [
-                //     {
-                //       type: "text",
-                //       text: "Tel. ",
-                //       color: "#aaaaaa",
-                //       size: "sm",
-                //       flex: 1,
-                //     },
-                //     {
-                //       type: "text",
-                //       text: row.tel,
-                //       wrap: true,
-                //       color: "#666666",
-                //       size: "sm",
-                //       flex: 5,
-                //     },
-                //   ],
-                // }));
-                // console.log(telData);
                 // create a data
                 const contentsData = locData.map((row) => ({
                   type: "bubble",
@@ -277,7 +250,7 @@ function handleEvent(event) {
                         action: {
                           type: "uri",
                           label: "หมายเลขโทรศัพท์",
-                          uri: `https://c177-2001-fb1-151-55ed-dda5-3c50-f8c-f4cf.ngrok.io/sdps/customers/${row._id}`,
+                          uri: `https://24e2-182-52-58-27.ngrok.io/sdps/customers/${row._id}`,
                         },
                       },
                       {
