@@ -53,7 +53,7 @@ function handleEvent(event) {
     return Promise.resolve(null);
   }
   const apiUrl =
-    "https://fca1-182-52-58-27.ngrok.io/distance"; //Backend API URL
+    "https://4454-2001-fb1-151-aa0a-71d5-6708-5193-e331.ngrok.io/distance"; //Backend API URL
   const user = mongoose.model("user");
   // console.log(event.source.userId); //message data
   user.find({ Line_id: event.source.userId }, (err, users) => {
@@ -63,7 +63,7 @@ function handleEvent(event) {
       // console.log("users");
       return new Promise((resolve) => {
         restClient.get(
-          `https://fca1-182-52-58-27.ngrok.io/customers/`,
+          `https://4454-2001-fb1-151-aa0a-71d5-6708-5193-e331.ngrok.io/customers/`,
           (cus) => {
             // console.log(cus)
 
@@ -250,7 +250,7 @@ function handleEvent(event) {
                         action: {
                           type: "uri",
                           label: "หมายเลขโทรศัพท์",
-                          uri: `https://24e2-182-52-58-27.ngrok.io/sdps/customers/${row._id}`,
+                          uri: `https://42b3-2001-fb1-151-aa0a-71d5-6708-5193-e331.ngrok.io/sdps/customers/${row._id}`,
                         },
                       },
                       {

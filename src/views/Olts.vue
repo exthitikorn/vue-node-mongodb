@@ -4,6 +4,7 @@
     <a href="/olts/new" class="ui blue button">New</a>
     <flash-message></flash-message>
     <br />
+    //OLT DATATABLE
     <div v-if="olts.length > 0">
       <div class="tableresponsive" style="overflow-x: auto">
         <table id="olts" class="ui celled table">
